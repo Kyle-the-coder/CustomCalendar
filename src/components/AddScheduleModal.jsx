@@ -9,6 +9,7 @@ export function AddScheduleModal({ setIsAddScheduleModalActive }) {
       <div className="modal-container">
         <div className="modal-top">
           <h1>Enter Your Schedule</h1>
+
           <img
             src={close}
             onClick={() => closeModal()}
@@ -20,6 +21,7 @@ export function AddScheduleModal({ setIsAddScheduleModalActive }) {
             <label className="text-label">Name:</label>
             <input type="text" className="text-input" />
           </div>
+
           <div className="modal-form-input-container">
             <label className="text-label">Start Time:</label>
             <input type="time" className="text-input" />
@@ -28,6 +30,7 @@ export function AddScheduleModal({ setIsAddScheduleModalActive }) {
             <label className="text-label">End Time:</label>
             <input type="time" className="text-input" />
           </div>
+          <button className="submit-button">Save Schedule</button>
         </div>
       </div>
     </div>
