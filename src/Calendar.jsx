@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AddScheduleModal } from "./components/AddScheduleModal";
 import {
   format,
   startOfMonth,
@@ -8,9 +9,13 @@ import {
   getDaysInMonth,
   isSameMonth,
 } from "date-fns";
-import "./calendar.css"; // Import your custom CSS file
+import "./styles/calendar.css";
 
 const Calendar = () => {
+  const [fullScheduleList, setFullScheduleList] = useState(null);
+
+  const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
+    useState(false);
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -60,27 +65,41 @@ const Calendar = () => {
     setCurrentMonth(addDays(startDateOfMonth, 32)); // Add 32 days to avoid issues with month lengths
   };
 
+  function activateScheduleModal() {
+    setIsAddScheduleModalActive(true);
+  }
+
   return (
-    <div className="calendar">
-      <div className="calendar-header">
-        <button onClick={goToPreviousMonth}>&lt;</button>
-        <h2>{format(startDateOfMonth, "MMMM yyyy")}</h2>
-        <button onClick={goToNextMonth}>&gt;</button>
-      </div>
-      <div className="calendar-grid">
-        {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
-          (day) => (
-            <div
-              key={day.toString()}
-              className={`calendar-day ${
-                !isSameMonth(day, startDateOfMonth) && "other-month"
-              }`}
-            >
-              {format(day, "d")}
-            </div>
-          )
-        )}
-      </div>
+    <div className="calendar-main-container">
+      {isAddScheduleModalActive ? (
+        <AddScheduleModal />
+      ) : (
+        <div className="calendar">
+          <div className="calendar-header">
+            <button onClick={goToPreviousMonth}>&lt;</button>
+            <h2>{format(startDateOfMonth, "MMMM yyyy")}</h2>
+            <button onClick={goToNextMonth}>&gt;</button>
+          </div>
+          <div className="calendar-grid">
+            {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
+              (day) => (
+                <div
+                  key={day.toString()}
+                  className={`calendar-day ${
+                    !isSameMonth(day, startDateOfMonth) && "other-month"
+                  }`}
+                  onClick={() => activateScheduleModal()}
+                >
+                  <div className="calendar-day-num">{format(day, "d")}</div>
+                  {fullScheduleList != null && (
+                    <div className="full-schedule-circle"></div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
