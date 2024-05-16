@@ -1,4 +1,3 @@
-/* Calendar.css */
 .calendar-main-container {
   width: 100%;
   height: 100%;
@@ -45,8 +44,8 @@
   align-items: center;
   width: 100%;
   cursor: pointer;
-  height: 100px; /* Each day takes 1/5 of the grid's height */
-  box-sizing: border-box; /* Include border width in the width calculation */
+  height: 100px;
+  box-sizing: border-box;
 }
 
 .calendar-day-num {
@@ -61,12 +60,29 @@
 }
 
 .other-month {
-  color: #979797; /* Gray out the text */
+  color: #979797;
 }
 
+.current-day {
+  background-color: aqua;
+  border-radius: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.calendar-num {
+  margin: 0;
+  padding: 5px;
+}
 .full-schedule-circle {
   width: 80%;
   height: 60%;
   background-color: #04acf42f;
   border-radius: 50%;
+}
+
+.modal-form-date {
+  font-size: 2rem;
+  height: fit-content;
+  margin: 0;
 }

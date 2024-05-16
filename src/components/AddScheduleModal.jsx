@@ -1,6 +1,6 @@
 import close from "../assets/close.png";
 import "../styles/schedulemodal.css";
-export function AddScheduleModal({ setIsAddScheduleModalActive }) {
+export function AddScheduleModal({ dateOfEvent, setIsAddScheduleModalActive }) {
   function closeModal() {
     setIsAddScheduleModalActive(false);
   }
@@ -17,6 +17,7 @@ export function AddScheduleModal({ setIsAddScheduleModalActive }) {
           />
         </div>
         <div className="modal-form-container">
+          <h4 className="modal-form-date">{dateOfEvent}</h4>
           <div className="modal-form-input-container">
             <label className="text-label">Name:</label>
             <input type="text" className="text-input" />

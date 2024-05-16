@@ -8,16 +8,24 @@ import {
   subDays,
   getDaysInMonth,
   isSameMonth,
+  isToday,
 } from "date-fns";
 import "./styles/calendar.css";
 
 const Calendar = () => {
   const [fullScheduleList, setFullScheduleList] = useState(null);
 
+  //STATES FOR FORM
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  const [dateOfEvent, setDateOfEvent] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(null);
+
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentDay, setCurrentDay] = useState(new Date().getDate());
 
   // Get the start date of the current month
   const startDateOfMonth = startOfMonth(currentMonth);
@@ -69,10 +77,18 @@ const Calendar = () => {
     setIsAddScheduleModalActive(true);
   }
 
+  // Function to handle clicking on a date
+  const handleDateClick = (date) => {
+    const formattedDate = format(date, "MM/dd/yy");
+    setDateOfEvent(formattedDate); // Set the selected date
+    setIsAddScheduleModalActive(true); // Open the modal
+  };
+
   return (
     <div className="calendar-main-container">
       {isAddScheduleModalActive ? (
         <AddScheduleModal
+          dateOfEvent={dateOfEvent}
           setIsAddScheduleModalActive={setIsAddScheduleModalActive}
         />
       ) : (
@@ -90,9 +106,17 @@ const Calendar = () => {
                   className={`calendar-day ${
                     !isSameMonth(day, startDateOfMonth) && "other-month"
                   }`}
-                  onClick={() => activateScheduleModal()}
+                  onClick={() => handleDateClick(day)}
                 >
-                  <div className="calendar-day-num">{format(day, "d")}</div>
+                  <div className={`calendar-day-num `}>
+                    <p
+                      className={`calendar-num ${
+                        isToday(day) && "current-day"
+                      }`}
+                    >
+                      {format(day, "d")}
+                    </p>
+                  </div>
                   {fullScheduleList != null && (
                     <div className="full-schedule-circle"></div>
                   )}
