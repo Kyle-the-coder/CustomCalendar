@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AddScheduleModal } from "./components/AddScheduleModal";
 import {
   format,
@@ -13,7 +13,7 @@ import {
 import "./styles/calendar.css";
 
 const Calendar = () => {
-  const [fullScheduleList, setFullScheduleList] = useState(null);
+  const [fullScheduleList, setFullScheduleList] = useState([]);
 
   //STATES FOR FORM
   const [startTime, setStartTime] = useState(null);
@@ -85,6 +85,15 @@ const Calendar = () => {
     setIsAddScheduleModalActive(true); // Open the modal
   };
 
+  useEffect(() => {
+    // Read data from localStorage
+    const scheduleData = localStorage.getItem("sched");
+    const data = localStorage.getItem("kyle");
+    if (scheduleData) {
+      setFullScheduleList([...fullScheduleList, JSON.parse(scheduleData)]);
+    }
+  }, []);
+  console.log("full", fullScheduleList);
   return (
     <div className="calendar-main-container">
       {isAddScheduleModalActive ? (
@@ -107,28 +116,35 @@ const Calendar = () => {
           </div>
           <div className="calendar-grid">
             {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
-              (day) => (
-                <div
-                  key={day.toString()}
-                  className={`calendar-day ${
-                    !isSameMonth(day, startDateOfMonth) && "other-month"
-                  }`}
-                  onClick={() => handleDateClick(day)}
-                >
-                  <div className={`calendar-day-num `}>
-                    <p
-                      className={`calendar-num ${
-                        isToday(day) && "current-day"
-                      }`}
-                    >
-                      {format(day, "d")}
-                    </p>
+              (day) => {
+                const formattedDate = format(day, "MM/dd/yy");
+                const hasEvent =
+                  fullScheduleList &&
+                  fullScheduleList.some(
+                    (schedule) => schedule.dateOfEvent === formattedDate
+                  );
+
+                return (
+                  <div
+                    key={day.toString()}
+                    className={`calendar-day ${
+                      !isSameMonth(day, startDateOfMonth) && "other-month"
+                    }`}
+                    onClick={() => handleDateClick(day)}
+                  >
+                    <div className={`calendar-day-num `}>
+                      <p
+                        className={`calendar-num ${
+                          isToday(day) && "current-day"
+                        }`}
+                      >
+                        {format(day, "d")}
+                      </p>
+                    </div>
+                    {hasEvent && <div className="full-schedule-circle"></div>}
                   </div>
-                  {fullScheduleList != null && (
-                    <div className="full-schedule-circle"></div>
-                  )}
-                </div>
-              )
+                );
+              }
             )}
           </div>
         </div>

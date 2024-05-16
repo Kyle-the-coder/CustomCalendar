@@ -23,9 +23,9 @@ export function AddScheduleModal({
       dateOfEvent: dateOfEvent,
     };
     const dateObjectString = JSON.stringify(dateObject);
-    localStorage.setItem(dateOfEvent, dateObjectString);
-    console.log(dateObject);
+    localStorage.setItem(eventName, dateObjectString);
   }
+
   return (
     <div className="modal-main-container">
       <div className="modal-container">
