@@ -17,6 +17,7 @@ const Calendar = () => {
 
   //STATES FOR FORM
   const [startTime, setStartTime] = useState(null);
+  const [eventName, setEventName] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [dateOfEvent, setDateOfEvent] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
@@ -90,6 +91,12 @@ const Calendar = () => {
         <AddScheduleModal
           dateOfEvent={dateOfEvent}
           setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+          setEndTime={setEndTime}
+          setStartTime={setStartTime}
+          setEventName={setEventName}
+          startTime={startTime}
+          endTime={endTime}
+          eventName={eventName}
         />
       ) : (
         <div className="calendar">
