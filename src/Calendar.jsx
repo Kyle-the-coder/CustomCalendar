@@ -72,7 +72,9 @@ const Calendar = () => {
   return (
     <div className="calendar-main-container">
       {isAddScheduleModalActive ? (
-        <AddScheduleModal />
+        <AddScheduleModal
+          setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+        />
       ) : (
         <div className="calendar">
           <div className="calendar-header">
