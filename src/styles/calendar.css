@@ -87,10 +87,3 @@
   margin: 0;
   text-align: center;
 }
-
-.form {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}

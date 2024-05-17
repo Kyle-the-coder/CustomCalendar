@@ -24,6 +24,7 @@ export function AddScheduleModal({
     };
     const dateObjectString = JSON.stringify(dateObject);
     localStorage.setItem(eventName, dateObjectString);
+    setIsAddScheduleModalActive(false);
   }
 
   return (

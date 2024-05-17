@@ -92,8 +92,7 @@ const Calendar = () => {
     if (scheduleData) {
       setFullScheduleList([...fullScheduleList, JSON.parse(scheduleData)]);
     }
-  }, []);
-  console.log("full", fullScheduleList);
+  }, [isAddScheduleModalActive]);
   return (
     <div className="calendar-main-container">
       {isAddScheduleModalActive ? (
