@@ -86,13 +86,19 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    // Read data from localStorage
-    const scheduleData = localStorage.getItem("sched");
-    const data = localStorage.getItem("kyle");
-    if (scheduleData) {
-      setFullScheduleList([...fullScheduleList, JSON.parse(scheduleData)]);
-    }
+    const searchLocalStorage = () => {
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        keys.push(key);
+        setFullScheduleList(keys);
+      }
+    };
+
+    searchLocalStorage();
   }, [isAddScheduleModalActive]);
+
+  console.log(fullScheduleList);
   return (
     <div className="calendar-main-container">
       {isAddScheduleModalActive ? (
@@ -120,7 +126,7 @@ const Calendar = () => {
                 const hasEvent =
                   fullScheduleList &&
                   fullScheduleList.some(
-                    (schedule) => schedule.dateOfEvent === formattedDate
+                    (schedule) => schedule === formattedDate
                   );
 
                 return (
