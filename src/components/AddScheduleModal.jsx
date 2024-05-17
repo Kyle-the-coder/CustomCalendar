@@ -39,7 +39,7 @@ export function AddScheduleModal({
           />
         </div>
         <div className="modal-form-container">
-          <form onSubmit={addDatesToStorage}>
+          <form className="form" onSubmit={addDatesToStorage}>
             <h4 className="modal-form-date">{dateOfEvent}</h4>
             <div className="modal-form-input-container">
               <label className="text-label">Name:</label>
