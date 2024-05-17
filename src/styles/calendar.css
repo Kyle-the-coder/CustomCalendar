@@ -46,6 +46,7 @@
   cursor: pointer;
   height: 100px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .calendar-day-num {
@@ -75,8 +76,11 @@
   padding: 5px;
 }
 .full-schedule-circle {
-  width: 80%;
-  height: 60%;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 67%;
+  height: 80%;
   background-color: #04acf42f;
   border-radius: 50%;
 }
