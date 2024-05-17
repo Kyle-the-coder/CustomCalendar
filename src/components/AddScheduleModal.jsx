@@ -16,14 +16,23 @@ export function AddScheduleModal({
 
   function addDatesToStorage(e) {
     e.preventDefault();
-    const dateObject = {
+    const eventInfo = {
       endTime: endTime,
       startTime: startTime,
       eventName: eventName,
       dateOfEvent: dateOfEvent,
     };
-    const dateObjectString = JSON.stringify(dateObject);
-    localStorage.setItem(eventName, dateObjectString);
+    const storeEventInfo = JSON.stringify(eventInfo);
+    const getInfo = localStorage.getItem(dateOfEvent);
+
+    if (getInfo === null) {
+      const newArray = [storeEventInfo];
+      localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
+    } else {
+      const newArray = JSON.parse(getInfo);
+      newArray.push(storeEventInfo);
+      localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
+    }
     setIsAddScheduleModalActive(false);
   }
 
