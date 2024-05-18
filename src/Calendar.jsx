@@ -21,6 +21,7 @@ const Calendar = () => {
   const [endTime, setEndTime] = useState(null);
   const [dateOfEvent, setDateOfEvent] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
+  const [isAvailableAppt, setIsAvailableAppt] = useState(false);
 
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
@@ -111,6 +112,8 @@ const Calendar = () => {
           startTime={startTime}
           endTime={endTime}
           eventName={eventName}
+          isAvailableAppt={isAvailableAppt}
+          setIsAvailableAppt={setIsAvailableAppt}
         />
       ) : (
         <div className="calendar">
