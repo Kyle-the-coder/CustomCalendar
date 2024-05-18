@@ -21,7 +21,7 @@ const Calendar = () => {
   const [endTime, setEndTime] = useState(null);
   const [dateOfEvent, setDateOfEvent] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
-  const [isAvailableAppt, setIsAvailableAppt] = useState(false);
+  const [isAvailableAppt, setIsAvailableAppt] = useState(true);
 
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);

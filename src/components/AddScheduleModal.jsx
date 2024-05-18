@@ -9,6 +9,8 @@ export function AddScheduleModal({
   eventName,
   dateOfEvent,
   setIsAddScheduleModalActive,
+  isAvailableAppt,
+  setIsAvailableAppt,
 }) {
   function closeModal() {
     setIsAddScheduleModalActive(false);
@@ -21,6 +23,7 @@ export function AddScheduleModal({
       startTime: startTime,
       eventName: eventName,
       dateOfEvent: dateOfEvent,
+      isAvailableAppt: isAvailableAppt,
     };
     const storeEventInfo = JSON.stringify(eventInfo);
     const getInfo = localStorage.getItem(dateOfEvent);
