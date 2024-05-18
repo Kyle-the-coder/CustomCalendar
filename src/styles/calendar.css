@@ -43,6 +43,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  padding-bottom: 100%;
   cursor: pointer;
   height: 100px;
   box-sizing: border-box;
@@ -77,12 +78,13 @@
 }
 .full-schedule-circle {
   position: absolute;
-  top: 10%;
-  left: 20%;
+  top: 50%;
+  left: 50%;
   width: 67%;
-  height: 80%;
+  height: 67%;
   background-color: #04acf42f;
   border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-form-date {
