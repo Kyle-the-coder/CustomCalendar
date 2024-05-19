@@ -57,12 +57,14 @@ export function SeeScheduleModal({
                 <div
                   key={index}
                   style={{
-                    backgroundColor: sched.isAvailableAppt ? "green" : "red",
+                    backgroundColor: sched.isAvailableAppt
+                      ? "lightGreen"
+                      : "red",
                   }}
                   className="see-sched-container"
                 >
                   <h1>
-                    {startTime}-{endTime}
+                    {startTime} - {endTime}
                   </h1>
                 </div>
               );
