@@ -11,6 +11,7 @@ import {
   isToday,
 } from "date-fns";
 import "./styles/calendar.css";
+import { SeeScheduleModal } from "./components/SeeScheduleModal";
 
 const Calendar = () => {
   const [fullScheduleList, setFullScheduleList] = useState([]);
@@ -24,6 +25,7 @@ const Calendar = () => {
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
 
   //STATES FOR MODALS
+  const [isModalActive, setIsModalActive] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [isSeeScheduleModalActive, setIsSeeScheduleModalActive] =
@@ -78,18 +80,16 @@ const Calendar = () => {
     setCurrentMonth(addDays(startDateOfMonth, 32)); // Add 32 days to avoid issues with month lengths
   };
 
-  function activateScheduleModal() {
-    setIsAddScheduleModalActive(true);
-  }
-
   // Function to handle clicking on a date
   const handleDateClick = (date) => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate); // Set the selected date
+    setIsModalActive(true);
     setIsAddScheduleModalActive(true); // Open the modal
   };
 
   const handleSeeSchedClick = () => {
+    setIsModalActive(true);
     setIsSeeScheduleModalActive(true);
   };
 
@@ -106,22 +106,25 @@ const Calendar = () => {
     searchLocalStorage();
   }, [isAddScheduleModalActive]);
 
-  console.log(fullScheduleList);
   return (
     <div className="calendar-main-container">
-      {isAddScheduleModalActive ? (
-        <AddScheduleModal
-          dateOfEvent={dateOfEvent}
-          setIsAddScheduleModalActive={setIsAddScheduleModalActive}
-          setEndTime={setEndTime}
-          setStartTime={setStartTime}
-          setEventName={setEventName}
-          startTime={startTime}
-          endTime={endTime}
-          eventName={eventName}
-          isAvailableAppt={isAvailableAppt}
-          setIsAvailableAppt={setIsAvailableAppt}
-        />
+      {isModalActive ? (
+        isAddScheduleModalActive ? (
+          <AddScheduleModal
+            dateOfEvent={dateOfEvent}
+            setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+            setEndTime={setEndTime}
+            setStartTime={setStartTime}
+            setEventName={setEventName}
+            startTime={startTime}
+            endTime={endTime}
+            eventName={eventName}
+            isAvailableAppt={isAvailableAppt}
+            setIsAvailableAppt={setIsAvailableAppt}
+          />
+        ) : (
+          <SeeScheduleModal />
+        )
       ) : (
         <div className="calendar">
           <div className="calendar-header">
@@ -145,7 +148,9 @@ const Calendar = () => {
                     className={`calendar-day ${
                       !isSameMonth(day, startDateOfMonth) && "other-month"
                     }`}
-                    onClick={() => handleDateClick(day)}
+                    onClick={() =>
+                      hasClick ? handleSeeSchedClick() : handleDateClick(day)
+                    }
                   >
                     <div className={`calendar-day-num `}>
                       <p
