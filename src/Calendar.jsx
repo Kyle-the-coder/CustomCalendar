@@ -23,7 +23,10 @@ const Calendar = () => {
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
 
+  //STATES FOR MODALS
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
+    useState(false);
+  const [isSeeScheduleModalActive, setIsSeeScheduleModalActive] =
     useState(false);
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -84,6 +87,10 @@ const Calendar = () => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate); // Set the selected date
     setIsAddScheduleModalActive(true); // Open the modal
+  };
+
+  const handleSeeSchedClick = () => {
+    setIsSeeScheduleModalActive(true);
   };
 
   useEffect(() => {
