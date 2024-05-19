@@ -5,6 +5,7 @@ import { useState } from "react";
 export function SeeScheduleModal({
   setIsModalActive,
   setIsSeeScheduleModalActive,
+  dateOfEvent,
 }) {
   const [dayScheduleList, setDayScheduleList] = useState();
 
@@ -12,12 +13,13 @@ export function SeeScheduleModal({
     setIsSeeScheduleModalActive(false);
     setIsModalActive(false);
   }
+
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">
         <div className="see-modal-top">
           <h1>Schedule for:</h1>
-          <h3>05/13/32</h3>
+          <h1>{dateOfEvent}</h1>
           <img
             src={close}
             onClick={() => closeModal()}

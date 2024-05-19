@@ -88,7 +88,9 @@ const Calendar = () => {
     setIsAddScheduleModalActive(true); // Open the modal
   };
 
-  const handleSeeSchedClick = () => {
+  const handleSeeSchedClick = (date) => {
+    const formattedDate = format(date, "MM/dd/yy");
+    setDateOfEvent(formattedDate);
     setIsModalActive(true);
     setIsSeeScheduleModalActive(true);
   };
@@ -128,8 +130,10 @@ const Calendar = () => {
           )}
           {isSeeScheduleModalActive && (
             <SeeScheduleModal
+              dateOfEvent={dateOfEvent}
               setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
               setIsModalActive={setIsModalActive}
+              fullScheduleList={fullScheduleList}
             />
           )}
         </>
@@ -157,7 +161,7 @@ const Calendar = () => {
                       !isSameMonth(day, startDateOfMonth) && "other-month"
                     }`}
                     onClick={() =>
-                      hasEvent ? handleSeeSchedClick() : handleDateClick(day)
+                      hasEvent ? handleSeeSchedClick(day) : handleDateClick(day)
                     }
                   >
                     <div className={`calendar-day-num `}>
