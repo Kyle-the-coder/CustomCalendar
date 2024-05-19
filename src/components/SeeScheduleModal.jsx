@@ -1,6 +1,7 @@
 import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
 import { useEffect, useState } from "react";
+import { parse, format } from "date-fns";
 
 export function SeeScheduleModal({
   setIsModalActive,
@@ -8,7 +9,8 @@ export function SeeScheduleModal({
   dateOfEvent,
   fullScheduleList,
 }) {
-  const [dayScheduleList, setDayScheduleList] = useState();
+  const [dayScheduleList, setDayScheduleList] = useState([]);
+  const [isSchedLoaded, setIsSchedLoaded] = useState(false);
 
   function closeModal() {
     setIsSeeScheduleModalActive(false);
@@ -19,12 +21,14 @@ export function SeeScheduleModal({
     fullScheduleList.map((date) => {
       if (date === dateOfEvent) {
         console.log(dateOfEvent);
-        setDayScheduleList(localStorage.getItem(dateOfEvent));
+        const eventList = JSON.parse(localStorage.getItem(dateOfEvent));
+        console.log(JSON.parse(eventList));
+        setDayScheduleList([JSON.parse(eventList)]);
+        setIsSchedLoaded(true);
       }
     });
   }, []);
 
-  console.log(dayScheduleList);
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">
@@ -38,7 +42,31 @@ export function SeeScheduleModal({
           />
         </div>
         <div className="see-modal-sched-container">
-          <div className="see-sched-container"></div>
+          {isSchedLoaded &&
+            dayScheduleList.map((sched, index) => {
+              const endTimeParsed = parse(sched.endTime, "HH:mm", new Date());
+              const endTime = format(endTimeParsed, "hh:mm a");
+              const startTimeParsed = parse(
+                sched.startTime,
+                "HH:mm",
+                new Date()
+              );
+              const startTime = format(startTimeParsed, "hh:mm a");
+              console.log(endTime);
+              return (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: sched.isAvailableAppt ? "green" : "red",
+                  }}
+                  className="see-sched-container"
+                >
+                  <h1>
+                    {startTime}-{endTime}
+                  </h1>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

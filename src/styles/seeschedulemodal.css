@@ -46,5 +46,8 @@
 
 .see-sched-container {
   width: 80%;
+  height: fit-content;
   display: flex;
+  padding: 5px;
+  border-radius: 0.5rem;
 }
