@@ -108,7 +108,6 @@ const Calendar = () => {
     searchLocalStorage();
   }, [isAddScheduleModalActive]);
 
-  console.log("isModal", isModalActive);
   return (
     <div className="calendar-main-container">
       {isModalActive ? (

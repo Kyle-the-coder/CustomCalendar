@@ -1,11 +1,12 @@
 import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SeeScheduleModal({
   setIsModalActive,
   setIsSeeScheduleModalActive,
   dateOfEvent,
+  fullScheduleList,
 }) {
   const [dayScheduleList, setDayScheduleList] = useState();
 
@@ -14,6 +15,16 @@ export function SeeScheduleModal({
     setIsModalActive(false);
   }
 
+  useEffect(() => {
+    fullScheduleList.map((date) => {
+      if (date === dateOfEvent) {
+        console.log(dateOfEvent);
+        setDayScheduleList(localStorage.getItem(dateOfEvent));
+      }
+    });
+  }, []);
+
+  console.log(dayScheduleList);
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">
@@ -26,7 +37,7 @@ export function SeeScheduleModal({
             className="modal-close-button"
           />
         </div>
-        <div className="see-modal-shed-container">
+        <div className="see-modal-sched-container">
           <div className="see-sched-container"></div>
         </div>
       </div>
