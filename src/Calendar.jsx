@@ -106,25 +106,33 @@ const Calendar = () => {
     searchLocalStorage();
   }, [isAddScheduleModalActive]);
 
+  console.log("isModal", isModalActive);
   return (
     <div className="calendar-main-container">
       {isModalActive ? (
-        isAddScheduleModalActive ? (
-          <AddScheduleModal
-            dateOfEvent={dateOfEvent}
-            setIsAddScheduleModalActive={setIsAddScheduleModalActive}
-            setEndTime={setEndTime}
-            setStartTime={setStartTime}
-            setEventName={setEventName}
-            startTime={startTime}
-            endTime={endTime}
-            eventName={eventName}
-            isAvailableAppt={isAvailableAppt}
-            setIsAvailableAppt={setIsAvailableAppt}
-          />
-        ) : (
-          <SeeScheduleModal />
-        )
+        <>
+          {isAddScheduleModalActive && (
+            <AddScheduleModal
+              dateOfEvent={dateOfEvent}
+              setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+              setIsModalActive={setIsModalActive}
+              setEndTime={setEndTime}
+              setStartTime={setStartTime}
+              setEventName={setEventName}
+              startTime={startTime}
+              endTime={endTime}
+              eventName={eventName}
+              isAvailableAppt={isAvailableAppt}
+              setIsAvailableAppt={setIsAvailableAppt}
+            />
+          )}
+          {isSeeScheduleModalActive && (
+            <SeeScheduleModal
+              setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
+              setIsModalActive={setIsModalActive}
+            />
+          )}
+        </>
       ) : (
         <div className="calendar">
           <div className="calendar-header">
@@ -149,7 +157,7 @@ const Calendar = () => {
                       !isSameMonth(day, startDateOfMonth) && "other-month"
                     }`}
                     onClick={() =>
-                      hasClick ? handleSeeSchedClick() : handleDateClick(day)
+                      hasEvent ? handleSeeSchedClick() : handleDateClick(day)
                     }
                   >
                     <div className={`calendar-day-num `}>

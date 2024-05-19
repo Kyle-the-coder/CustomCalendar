@@ -9,11 +9,13 @@ export function AddScheduleModal({
   eventName,
   dateOfEvent,
   setIsAddScheduleModalActive,
+  setIsModalActive,
   isAvailableAppt,
   setIsAvailableAppt,
 }) {
   function closeModal() {
     setIsAddScheduleModalActive(false);
+    setIsModalActive(false);
   }
 
   function addDatesToStorage(e) {

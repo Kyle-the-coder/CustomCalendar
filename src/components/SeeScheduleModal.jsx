@@ -1,6 +1,17 @@
 import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
-export function SeeScheduleModal() {
+import { useState } from "react";
+
+export function SeeScheduleModal({
+  setIsModalActive,
+  setIsSeeScheduleModalActive,
+}) {
+  const [dayScheduleList, setDayScheduleList] = useState();
+
+  function closeModal() {
+    setIsSeeScheduleModalActive(false);
+    setIsModalActive(false);
+  }
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">
