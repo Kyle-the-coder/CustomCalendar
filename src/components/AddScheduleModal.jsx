@@ -5,6 +5,7 @@ export function AddScheduleModal({
   dateOfEvent,
   setIsAddScheduleModalActive,
   setIsModalActive,
+  setUpdateTrigger,
 }) {
   //STATES FOR FORM
   const [startTime, setStartTime] = useState(null);
@@ -35,6 +36,7 @@ export function AddScheduleModal({
       localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
     }
     setIsAddScheduleModalActive(false);
+    setUpdateTrigger((prev) => !prev);
   }
 
   return (

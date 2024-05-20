@@ -14,6 +14,7 @@ export function SeeScheduleModal({
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
+  const [updateTrigger, setUpdateTrigger] = useState(false);
 
   function closeModal() {
     setIsSeeScheduleModalActive(false);
@@ -40,7 +41,7 @@ export function SeeScheduleModal({
         }
       }
     });
-  }, [dateOfEvent, fullScheduleList, isAddScheduleModalActive]);
+  }, [dateOfEvent, fullScheduleList, isAddScheduleModalActive, updateTrigger]);
 
   return (
     <div className="see-modal-main-container">
@@ -95,6 +96,7 @@ export function SeeScheduleModal({
             dateOfEvent={dateOfEvent}
             setIsAddScheduleModalActive={setIsAddScheduleModalActive}
             setIsModalActive={setIsModalActive}
+            setUpdateTrigger={setUpdateTrigger}
           />
         )}
       </div>
