@@ -39,6 +39,7 @@ export function AddScheduleModal({
       localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
     }
     setIsAddScheduleModalActive(false);
+    setIsModalActive(false);
   }
 
   return (
