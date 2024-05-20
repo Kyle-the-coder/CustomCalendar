@@ -16,20 +16,13 @@ import { SeeScheduleModal } from "./components/SeeScheduleModal";
 const Calendar = () => {
   const [fullScheduleList, setFullScheduleList] = useState([]);
 
-  //STATES FOR FORM
-  const [startTime, setStartTime] = useState(null);
-  const [eventName, setEventName] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-  const [dateOfEvent, setDateOfEvent] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(null);
-  const [isAvailableAppt, setIsAvailableAppt] = useState(true);
-
   //STATES FOR MODALS
   const [isModalActive, setIsModalActive] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [isSeeScheduleModalActive, setIsSeeScheduleModalActive] =
     useState(false);
+  const [dateOfEvent, setDateOfEvent] = useState(null);
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentDay, setCurrentDay] = useState(new Date().getDate());
@@ -106,7 +99,7 @@ const Calendar = () => {
     };
 
     searchLocalStorage();
-  }, [isAddScheduleModalActive]);
+  }, [isAddScheduleModalActive, isModalActive, isSeeScheduleModalActive]);
 
   return (
     <div className="calendar-main-container">
