@@ -60,7 +60,6 @@ export function SeeScheduleModal({
     });
   }, [dateOfEvent, fullScheduleList, isAddScheduleModalActive, updateTrigger]);
 
-  console.log(fullScheduleList);
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">

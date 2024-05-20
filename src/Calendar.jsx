@@ -110,9 +110,6 @@ const Calendar = () => {
               dateOfEvent={dateOfEvent}
               setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
               setIsModalActive={setIsModalActive}
-              fullScheduleList={fullScheduleList}
-              isAddScheduleModalActive={isAddScheduleModalActive}
-              setIsAddScheduleModalActive={setIsAddScheduleModalActive}
             />
           )}
         </>
