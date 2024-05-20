@@ -2,9 +2,9 @@ import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
-import { AddTimeBlockDisplay } from "./AddScheduleModal";
+import { AddTimeBlockDisplay } from "./AddTimeBlockDisplay";
 
-export function SeeScheduleModal({
+export function SeeTimeBlocksModal({
   setIsModalActive,
   setIsSeeScheduleModalActive,
   dateOfEvent,
