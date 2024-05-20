@@ -4,7 +4,6 @@ import "../styles/schedulemodal.css";
 export function AddScheduleModal({
   dateOfEvent,
   setIsAddScheduleModalActive,
-  setIsModalActive,
   setUpdateTrigger,
 }) {
   //STATES FOR FORM
@@ -35,8 +34,8 @@ export function AddScheduleModal({
       newArray.push(storeEventInfo);
       localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
     }
-    setIsAddScheduleModalActive(false);
     setUpdateTrigger((prev) => !prev);
+    setIsAddScheduleModalActive(false);
   }
 
   return (

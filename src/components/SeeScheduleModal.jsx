@@ -8,8 +8,8 @@ export function SeeScheduleModal({
   setIsModalActive,
   setIsSeeScheduleModalActive,
   dateOfEvent,
-  fullScheduleList,
 }) {
+  const [fullScheduleList, setFullScheduleList] = useState([]);
   const [dayScheduleList, setDayScheduleList] = useState([]);
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
@@ -26,7 +26,21 @@ export function SeeScheduleModal({
   }
 
   useEffect(() => {
+    const searchLocalStorage = () => {
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        keys.push(key);
+        setFullScheduleList(keys);
+      }
+    };
+
+    searchLocalStorage();
+  }, [isAddScheduleModalActive]);
+
+  useEffect(() => {
     fullScheduleList.forEach((date) => {
+      console.log("ran", updateTrigger);
       if (date === dateOfEvent) {
         const eventList = localStorage.getItem(dateOfEvent);
         if (eventList) {
@@ -38,11 +52,15 @@ export function SeeScheduleModal({
           } catch (error) {
             console.error("Error parsing JSON data from localStorage", error);
           }
+        } else {
+          setDayScheduleList([]);
+          setIsSchedLoaded(true);
         }
       }
     });
   }, [dateOfEvent, fullScheduleList, isAddScheduleModalActive, updateTrigger]);
 
+  console.log(fullScheduleList);
   return (
     <div className="see-modal-main-container">
       <div className="modal-container">
@@ -95,7 +113,6 @@ export function SeeScheduleModal({
           <AddScheduleModal
             dateOfEvent={dateOfEvent}
             setIsAddScheduleModalActive={setIsAddScheduleModalActive}
-            setIsModalActive={setIsModalActive}
             setUpdateTrigger={setUpdateTrigger}
           />
         )}
