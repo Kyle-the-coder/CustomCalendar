@@ -10,7 +10,7 @@ import {
   isToday,
 } from "date-fns";
 import "./styles/calendar.css";
-import { SeeScheduleModal } from "./components/SeeScheduleModal";
+import { SeeTimeBlocksModal } from "./components/SeeTimeBlocksModal";
 
 const Calendar = () => {
   const [fullScheduleList, setFullScheduleList] = useState([]);
@@ -96,7 +96,7 @@ const Calendar = () => {
       {isModalActive ? (
         <>
           {isSeeScheduleModalActive && (
-            <SeeScheduleModal
+            <SeeTimeBlocksModal
               dateOfEvent={dateOfEvent}
               setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
               setIsModalActive={setIsModalActive}
