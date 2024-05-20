@@ -2,7 +2,7 @@ import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
-import { AddScheduleModal } from "./AddScheduleModal";
+import { AddTimeBlockDisplay } from "./AddScheduleModal";
 
 export function SeeScheduleModal({
   setIsModalActive,
@@ -34,7 +34,6 @@ export function SeeScheduleModal({
         setFullScheduleList(keys);
       }
     };
-
     searchLocalStorage();
   }, [isAddScheduleModalActive]);
 
@@ -58,7 +57,7 @@ export function SeeScheduleModal({
         }
       }
     });
-  }, [dateOfEvent, fullScheduleList, isAddScheduleModalActive, updateTrigger]);
+  }, [fullScheduleList, updateTrigger]);
 
   return (
     <div className="see-modal-main-container">
@@ -109,7 +108,7 @@ export function SeeScheduleModal({
           </button>
         </div>
         {isAddScheduleModalActive && (
-          <AddScheduleModal
+          <AddTimeBlockDisplay
             dateOfEvent={dateOfEvent}
             setIsAddScheduleModalActive={setIsAddScheduleModalActive}
             setUpdateTrigger={setUpdateTrigger}

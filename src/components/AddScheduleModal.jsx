@@ -1,7 +1,7 @@
 import { useState } from "react";
 import close from "../assets/close.png";
 import "../styles/schedulemodal.css";
-export function AddScheduleModal({
+export function AddTimeBlockDisplay({
   dateOfEvent,
   setIsAddScheduleModalActive,
   setUpdateTrigger,

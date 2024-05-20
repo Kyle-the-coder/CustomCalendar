@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AddScheduleModal } from "./components/AddScheduleModal";
 import {
   format,
   startOfMonth,
@@ -23,9 +22,9 @@ const Calendar = () => {
   const [isSeeScheduleModalActive, setIsSeeScheduleModalActive] =
     useState(false);
   const [dateOfEvent, setDateOfEvent] = useState(null);
+
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [currentDay, setCurrentDay] = useState(new Date().getDate());
 
   // Get the start date of the current month
   const startDateOfMonth = startOfMonth(currentMonth);
@@ -73,14 +72,6 @@ const Calendar = () => {
     setCurrentMonth(addDays(startDateOfMonth, 32)); // Add 32 days to avoid issues with month lengths
   };
 
-  // Function to handle clicking on a date
-  // const handleDateClick = (date) => {
-  //   const formattedDate = format(date, "MM/dd/yy");
-  //   setDateOfEvent(formattedDate); // Set the selected date
-  //   setIsModalActive(true);
-  //   setIsAddScheduleModalActive(true); // Open the modal
-  // };
-
   const handleSeeSchedClick = (date) => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate);
@@ -97,7 +88,6 @@ const Calendar = () => {
         setFullScheduleList(keys);
       }
     };
-
     searchLocalStorage();
   }, [isAddScheduleModalActive, isModalActive, isSeeScheduleModalActive]);
 
