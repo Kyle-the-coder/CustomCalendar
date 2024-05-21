@@ -61,7 +61,7 @@ export function SeeTimeBlocksModal({
 
   return (
     <div className="see-modal-main-container">
-      <div className="modal-container">
+      <div className="see-modal-container">
         <div className="see-modal-top">
           <h1>Schedule for:</h1>
           <h1>{dateOfEvent}</h1>
@@ -101,7 +101,7 @@ export function SeeTimeBlocksModal({
         </div>
         <div className="add-schedule-button-container">
           <button
-            className="submit-button"
+            className="see-submit-button"
             onClick={() => handleAddTimeBlockModal()}
           >
             Add Time Block

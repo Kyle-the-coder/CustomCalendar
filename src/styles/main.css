@@ -1,7 +1,6 @@
 .main-container {
   max-width: 1200px;
   height: 80rem;
-  background-color: antiquewhite;
   display: flex;
   justify-content: center;
 }

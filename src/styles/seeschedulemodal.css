@@ -1,6 +1,7 @@
 .see-modal-main-container {
   width: 100%;
-  height: 100vh;
+  height: 70vh;
+  background-color: blue;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -10,11 +11,13 @@
   left: 0;
 }
 
-.modal-container {
-  width: 60%;
+.see-modal-container {
+  width: 500px;
+  height: 600px;
   background-color: rgb(191, 191, 191);
   display: flex;
   flex-direction: column;
+  padding: 10px;
   align-items: center;
   justify-content: flex-start;
   border-radius: 0.5rem;
@@ -22,6 +25,7 @@
 
 .see-modal-top {
   width: 100%;
+  height: 10%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -35,7 +39,8 @@
 
 .see-modal-sched-container {
   width: 100%;
-  height: 60%;
+  height: 80%;
+  overflow-y: scroll;
   background-color: whitesmoke;
   display: flex;
   flex-direction: column;
@@ -51,19 +56,19 @@
   border-radius: 0.5rem;
 }
 
-.submit-button {
+.see-submit-button {
   padding: 8px 20px 8px 20px;
   background-color: rgb(166, 245, 242);
   font-size: 1.5rem;
   border-radius: 0.5rem;
   border: none;
-  margin-top: 6%;
   cursor: pointer;
 }
 
 .add-schedule-button-container {
   width: 100%;
-  height: 20%;
+  height: 15%;
+  background-color: antiquewhite;
   display: flex;
   justify-content: center;
   align-items: center;
