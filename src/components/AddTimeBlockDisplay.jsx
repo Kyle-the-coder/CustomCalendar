@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import close from "../assets/close.png";
 import "../styles/schedulemodal.css";
+import gsap from "gsap";
 export function AddTimeBlockDisplay({
   dateOfEvent,
   setIsAddScheduleModalActive,
   setUpdateTrigger,
+  isAddScheduleModalActive,
 }) {
   //STATES FOR FORM
   const [startTime, setStartTime] = useState(null);
@@ -38,10 +40,20 @@ export function AddTimeBlockDisplay({
     setIsAddScheduleModalActive(false);
   }
 
+  useEffect(() => {
+    if (isAddScheduleModalActive) {
+      gsap.from(".modal-container", {
+        x: "-100%",
+        duration: 1.2,
+        ease: "power3.inOut",
+      });
+    }
+  }, []);
+
   return (
     <div className="modal-container">
       <div className="modal-top">
-        <h1>Enter Your Schedule</h1>
+        <h1>Enter A Time Block</h1>
 
         <img
           src={close}

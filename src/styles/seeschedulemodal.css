@@ -1,7 +1,6 @@
-.see-modal-main-container {
+.see-timeblock-main-container {
   width: 100%;
   height: 70vh;
-  background-color: blue;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -11,33 +10,37 @@
   left: 0;
 }
 
-.see-modal-container {
+.timeblock-display-container {
   width: 500px;
   height: 600px;
-  background-color: rgb(191, 191, 191);
+  background-color: rgb(227, 222, 222);
   display: flex;
   flex-direction: column;
-  padding: 10px;
   align-items: center;
   justify-content: flex-start;
-  border-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 10px 15px 20px rgba(100, 100, 100, 0.5),
+    inset 3px 4px 2px rgba(255, 255, 255, 0.5);
 }
 
-.see-modal-top {
+.tb-display-top {
   width: 100%;
-  height: 10%;
+  height: 15%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.modal-close-button {
+.tb-close-button {
   width: 30px;
   height: 30px;
   cursor: pointer;
 }
 
-.see-modal-sched-container {
+.tb-sched-container {
   width: 100%;
   height: 80%;
   overflow-y: scroll;
@@ -48,27 +51,47 @@
   justify-content: flex-start;
 }
 
-.see-sched-container {
-  width: 80%;
+.tb-container {
+  width: 90%;
   height: fit-content;
   display: flex;
   padding: 5px;
+  margin-left: 4%;
+  margin-top: 5%;
   border-radius: 0.5rem;
+  cursor: pointer;
+  align-items: center;
+  transition: all 0.5s;
+  justify-content: space-between;
+  box-shadow: 5px 5px 10px rgba(100, 100, 100, 0.5),
+    inset 3px 4px 2px rgba(255, 255, 255, 0.5);
 }
 
-.see-submit-button {
+.tb {
+  margin-left: 2%;
+}
+.tb-end {
+  margin-right: 2%;
+}
+
+.tb-submit-button {
   padding: 8px 20px 8px 20px;
-  background-color: rgb(166, 245, 242);
+  background-color: rgb(145, 183, 253);
   font-size: 1.5rem;
+  border: 2px solid black;
   border-radius: 0.5rem;
-  border: none;
+  box-shadow: 5px 5px 4px rgba(100, 100, 100, 0.5),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.5);
   cursor: pointer;
+  transition: all 0.7s;
+}
+.tb-submit-button:hover {
+  background-color: rgb(173, 199, 252);
 }
 
 .add-schedule-button-container {
   width: 100%;
   height: 15%;
-  background-color: antiquewhite;
   display: flex;
   justify-content: center;
   align-items: center;

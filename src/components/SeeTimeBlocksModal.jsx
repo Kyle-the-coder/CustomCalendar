@@ -15,6 +15,7 @@ export function SeeTimeBlocksModal({
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [updateTrigger, setUpdateTrigger] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   function closeModal() {
     setIsSeeScheduleModalActive(false);
@@ -60,18 +61,18 @@ export function SeeTimeBlocksModal({
   }, [fullScheduleList, updateTrigger]);
 
   return (
-    <div className="see-modal-main-container">
-      <div className="see-modal-container">
-        <div className="see-modal-top">
+    <div className="see-timeblock-main-container">
+      <div className="timeblock-display-container">
+        <div className="tb-display-top">
           <h1>Schedule for:</h1>
           <h1>{dateOfEvent}</h1>
           <img
             src={close}
             onClick={() => closeModal()}
-            className="modal-close-button"
+            className="tb-close-button"
           />
         </div>
-        <div className="see-modal-sched-container">
+        <div className="tb-sched-container">
           {isSchedLoaded &&
             dayScheduleList.map((sched, index) => {
               const endTimeParsed = parse(sched.endTime, "HH:mm", new Date());
@@ -86,22 +87,34 @@ export function SeeTimeBlocksModal({
                 <div
                   key={index}
                   style={{
-                    backgroundColor: sched.isAvailableAppt
-                      ? "lightGreen"
-                      : "red",
+                    backgroundColor:
+                      hoveredIndex === index
+                        ? sched.isAvailableAppt
+                          ? "rgba(166, 245, 242, 0.479)"
+                          : "darkRed"
+                        : sched.isAvailableAppt
+                        ? "lightGreen"
+                        : "red",
                   }}
-                  className="see-sched-container"
+                  className="tb-container"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <h1>
+                  <h2 className="tb">
                     {startTime} - {endTime}
-                  </h1>
+                  </h2>
+                  {sched.isAvailableAppt ? (
+                    <h2 className="tb-end">Available</h2>
+                  ) : (
+                    <h2 className="tb-end">Unavailable</h2>
+                  )}
                 </div>
               );
             })}
         </div>
         <div className="add-schedule-button-container">
           <button
-            className="see-submit-button"
+            className="tb-submit-button"
             onClick={() => handleAddTimeBlockModal()}
           >
             Add Time Block
@@ -112,6 +125,7 @@ export function SeeTimeBlocksModal({
             dateOfEvent={dateOfEvent}
             setIsAddScheduleModalActive={setIsAddScheduleModalActive}
             setUpdateTrigger={setUpdateTrigger}
+            isAddScheduleModalActive={isAddScheduleModalActive}
           />
         )}
       </div>
