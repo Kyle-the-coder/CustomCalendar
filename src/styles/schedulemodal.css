@@ -1,5 +1,6 @@
 .modal-container {
   width: 100%;
+  max-width: 500px;
   background-color: rgb(227, 222, 222);
   display: flex;
   flex-direction: column;
@@ -8,11 +9,11 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   position: absolute;
-  top: 100.1%;
-  left: 0;
-  z-index: 1;
-  box-shadow: 10px 15px 20px rgba(100, 100, 100, 0.5),
-    inset 3px -1px 2px rgba(255, 255, 255, 0.5);
+  top: 93%;
+  left: 50%;
+
+  transform: translateX(-50%);
+  visibility: hidden;
 }
 
 .modal-top {

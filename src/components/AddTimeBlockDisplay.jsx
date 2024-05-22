@@ -14,7 +14,27 @@ export function AddTimeBlockDisplay({
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
 
   function closeModal() {
-    setIsAddScheduleModalActive(false);
+    const modal = document.querySelector(".modal-container");
+    if (modal) {
+      gsap.fromTo(
+        modal,
+        {
+          y: "0%",
+          duration: 1.2,
+          ease: "power3.inOut",
+          boxShadow:
+            "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
+        },
+        {
+          y: "-100%",
+          visibility: "visible",
+          boxShadow: "none",
+          onComplete: () => {
+            setIsAddScheduleModalActive(false);
+          },
+        }
+      );
+    }
   }
 
   function addDatesToStorage(e) {
@@ -37,16 +57,23 @@ export function AddTimeBlockDisplay({
       localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
     }
     setUpdateTrigger((prev) => !prev);
-    setIsAddScheduleModalActive(false);
+    closeModal();
   }
 
   useEffect(() => {
     if (isAddScheduleModalActive) {
-      gsap.from(".modal-container", {
-        x: "-100%",
-        duration: 1.2,
-        ease: "power3.inOut",
-      });
+      const modal = document.querySelector(".modal-container");
+      gsap.fromTo(
+        modal,
+        { y: "-100%", visibility: "visible", boxShadow: "none" },
+        {
+          y: "0%",
+          duration: 1.2,
+          ease: "power3.inOut",
+          boxShadow:
+            "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
+        }
+      );
     }
   }, []);
 

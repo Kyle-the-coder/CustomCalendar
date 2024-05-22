@@ -62,7 +62,14 @@ export function SeeTimeBlocksModal({
 
   return (
     <div className="see-timeblock-main-container">
-      <div className="timeblock-display-container">
+      <div
+        className="timeblock-display-container"
+        style={{
+          boxShadow: isAddScheduleModalActive
+            ? "10px -5px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)"
+            : "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
+        }}
+      >
         <div className="tb-display-top">
           <h1>Schedule for:</h1>
           <h1>{dateOfEvent}</h1>
@@ -120,15 +127,15 @@ export function SeeTimeBlocksModal({
             Add Time Block
           </button>
         </div>
-        {isAddScheduleModalActive && (
-          <AddTimeBlockDisplay
-            dateOfEvent={dateOfEvent}
-            setIsAddScheduleModalActive={setIsAddScheduleModalActive}
-            setUpdateTrigger={setUpdateTrigger}
-            isAddScheduleModalActive={isAddScheduleModalActive}
-          />
-        )}
       </div>
+      {isAddScheduleModalActive && (
+        <AddTimeBlockDisplay
+          dateOfEvent={dateOfEvent}
+          setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+          setUpdateTrigger={setUpdateTrigger}
+          isAddScheduleModalActive={isAddScheduleModalActive}
+        />
+      )}
     </div>
   );
 }
