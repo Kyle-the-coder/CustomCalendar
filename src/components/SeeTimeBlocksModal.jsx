@@ -40,7 +40,6 @@ export function SeeTimeBlocksModal({
 
   useEffect(() => {
     fullScheduleList.forEach((date) => {
-      console.log("ran", updateTrigger);
       if (date === dateOfEvent) {
         const eventList = localStorage.getItem(dateOfEvent);
         if (eventList) {
@@ -60,6 +59,7 @@ export function SeeTimeBlocksModal({
     });
   }, [fullScheduleList, updateTrigger]);
 
+  console.log(dayScheduleList.length === 0);
   return (
     <div className="see-timeblock-main-container">
       <div
@@ -80,7 +80,12 @@ export function SeeTimeBlocksModal({
           />
         </div>
         <div className="tb-sched-container">
-          {isSchedLoaded &&
+          {dayScheduleList.length === 0 ? (
+            <h1 style={{ margin: "0 auto", marginTop: "35%" }}>
+              No Time Blocks on this Date
+            </h1>
+          ) : (
+            isSchedLoaded &&
             dayScheduleList.map((sched, index) => {
               const endTimeParsed = parse(sched.endTime, "HH:mm", new Date());
               const endTime = format(endTimeParsed, "hh:mm a");
@@ -89,6 +94,7 @@ export function SeeTimeBlocksModal({
                 "HH:mm",
                 new Date()
               );
+              console.log("sched", sched.isAvailableAppt);
               const startTime = format(startTimeParsed, "hh:mm a");
               return (
                 <div
@@ -97,11 +103,11 @@ export function SeeTimeBlocksModal({
                     backgroundColor:
                       hoveredIndex === index
                         ? sched.isAvailableAppt
-                          ? "rgba(166, 245, 242, 0.479)"
-                          : "darkRed"
+                          ? "rgb(78, 203, 78)"
+                          : "rgb(200, 62, 62)"
                         : sched.isAvailableAppt
                         ? "lightGreen"
-                        : "red",
+                        : "lightCoral",
                   }}
                   className="tb-container"
                   onMouseEnter={() => setHoveredIndex(index)}
@@ -117,7 +123,8 @@ export function SeeTimeBlocksModal({
                   )}
                 </div>
               );
-            })}
+            })
+          )}
         </div>
         <div className="add-schedule-button-container">
           <button

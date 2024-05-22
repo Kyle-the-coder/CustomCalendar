@@ -98,3 +98,7 @@
   justify-content: center;
   align-items: center;
 }
+
+.free {
+  background-color: rgb(78, 203, 78);
+}

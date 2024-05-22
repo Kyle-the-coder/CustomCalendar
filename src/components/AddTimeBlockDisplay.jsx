@@ -107,6 +107,16 @@ export function AddTimeBlockDisplay({
               onChange={(e) => setEndTime(e.target.value)}
             />
           </div>
+          <div className="modal-form-input-container">
+            <label className="text-label">Availability:</label>
+            <select
+              className="text-input"
+              onChange={(e) => setIsAvailableAppt(e.target.value === "true")}
+            >
+              <option value={true}>Open</option>
+              <option value={false}>Closed</option>
+            </select>
+          </div>
           <button type="submit" className="submit-button">
             Save Schedule
           </button>
