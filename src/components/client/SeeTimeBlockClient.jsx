@@ -1,8 +1,7 @@
-import "../styles/seeschedulemodal.css";
-import close from "../assets/close.png";
+import "../../styles/seeschedulemodal.css";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
-import { AddTimeBlockDisplay } from "./AddTimeBlockDisplay";
+import { BookNowForm } from "./BookNowForm";
 
 export function SeeTimeBlocksClient({
   setIsModalActive,
@@ -15,6 +14,7 @@ export function SeeTimeBlocksClient({
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [timeBlock, setTimeBlock] = useState(null);
 
   function handleAddTimeBlockModal() {
     setIsAddScheduleModalActive(true);
@@ -122,15 +122,17 @@ export function SeeTimeBlocksClient({
           >
             Book Now
           </button>
-          {/* {isAddScheduleModalActive && (
-            <AddTimeBlockDisplay
+          {isAddScheduleModalActive && (
+            <BookNowForm
               dateOfEvent={dateOfEvent}
               setIsAddScheduleModalActive={setIsAddScheduleModalActive}
               setUpdateTrigger={setUpdateTrigger}
               isAddScheduleModalActive={isAddScheduleModalActive}
               dayScheduleList={dayScheduleList}
+              timeBlock={timeBlock}
+              setTimeBlock={setTimeBlock}
             />
-          )} */}
+          )}
         </div>
       </div>
     </div>

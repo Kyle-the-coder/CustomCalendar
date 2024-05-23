@@ -79,9 +79,13 @@
 .other-month {
   color: #979797;
 }
+.no-event {
+  color: #979797;
+  background-color: #e5e5e5;
+}
 
 .current-day {
-  background-color: aqua;
+  background-color: rgb(179, 243, 111);
   border-radius: 50%;
   display: flex;
   justify-content: flex-start;

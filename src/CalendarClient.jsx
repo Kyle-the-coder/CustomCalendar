@@ -93,7 +93,7 @@ const CalendarClient = () => {
   }, [isAddScheduleModalActive, isModalActive, updateTrigger]);
 
   return (
-    <div className="calendar-main-container">
+    <div className="calendar-main-container" style={{ marginBottom: "10%" }}>
       <div className="calendar">
         <div className="calendar-header">
           <button onClick={goToPreviousMonth}>&lt;</button>
@@ -113,7 +113,7 @@ const CalendarClient = () => {
                   key={day.toString()}
                   className={`calendar-day ${
                     !isSameMonth(day, startDateOfMonth) && "other-month"
-                  }`}
+                  }  ${!hasEvent && "no-event"}`}
                   onClick={() => handleSeeSchedClick(day)}
                 >
                   <div className={`calendar-day-num `}>
@@ -144,4 +144,4 @@ const CalendarClient = () => {
   );
 };
 
-export default CalendarAdmin;
+export default CalendarClient;
