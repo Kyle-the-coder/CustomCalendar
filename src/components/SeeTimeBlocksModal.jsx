@@ -41,6 +41,11 @@ export function SeeTimeBlocksModal({
             try {
               const parsedList = JSON.parse(eventList);
               const events = parsedList.map((item) => JSON.parse(item));
+              events.sort((a, b) => {
+                const timeA = parse(a.startTime, "HH:mm", new Date());
+                const timeB = parse(b.startTime, "HH:mm", new Date());
+                return timeA - timeB;
+              });
               setDayScheduleList(events);
               setIsSchedLoaded(true);
             } catch (error) {
@@ -59,17 +64,10 @@ export function SeeTimeBlocksModal({
 
   return (
     <div className="see-timeblock-main-container">
-      <div
-        className="timeblock-display-container"
-        style={{
-          boxShadow: isAddScheduleModalActive
-            ? "10px -5px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)"
-            : "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
-        }}
-      >
+      <div className="timeblock-display-container">
         <div className="tb-display-top">
-          <h3>Schedule for:</h3>
-          <h3>{dateOfEvent}</h3>
+          <h1>Schedule for:</h1>
+          <h1>{dateOfEvent}</h1>
         </div>
         <div className="tb-sched-container">
           {dayScheduleList.length === 0 ? (

@@ -14,6 +14,7 @@ export function AddTimeBlockDisplay({
   const [endTime, setEndTime] = useState(null);
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
   const [error, setError] = useState(false);
+  const [splitIntoHourBlocks, setSplitIntoHourBlocks] = useState(false);
 
   function closeModal() {
     const modal = document.querySelector(".modal-container");
@@ -43,6 +44,17 @@ export function AddTimeBlockDisplay({
     // Clear any previous errors
     setError("");
 
+    if (!startTime && !endTime) {
+      setError("Start time and End Time are empty.");
+      return;
+    } else if (!startTime) {
+      setError("Start Time is empty");
+      return;
+    } else if (!endTime) {
+      setError("End time is empty.");
+      return;
+    }
+
     // Validation: Ensure startTime is before endTime
     if (startTime >= endTime) {
       setError("Start time must be before end time.");
@@ -63,26 +75,55 @@ export function AddTimeBlockDisplay({
       return;
     }
 
-    // If no validation errors, proceed to store the event
-    const eventInfo = {
-      endTime: endTime,
-      startTime: startTime,
+    // Helper function to create event blocks
+    const createEventBlock = (start, end) => ({
+      endTime: end,
+      startTime: start,
       dateOfEvent: dateOfEvent,
       isAvailableAppt: isAvailableAppt,
-    };
+    });
 
-    const storeEventInfo = JSON.stringify(eventInfo);
-    const getInfo = localStorage.getItem(dateOfEvent);
+    let eventBlocks = [];
 
-    if (getInfo === null) {
-      const newArray = [storeEventInfo];
-      localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
+    if (splitIntoHourBlocks) {
+      let currentStartTime = new Date(`1970-01-01T${startTime}:00`);
+      let currentEndTime = new Date(
+        currentStartTime.getTime() + 60 * 60 * 1000
+      );
+
+      while (currentEndTime <= new Date(`1970-01-01T${endTime}:00`)) {
+        eventBlocks.push(
+          createEventBlock(
+            currentStartTime.toTimeString().slice(0, 5),
+            currentEndTime.toTimeString().slice(0, 5)
+          )
+        );
+
+        currentStartTime = new Date(
+          currentStartTime.getTime() + 60 * 60 * 1000
+        );
+        currentEndTime = new Date(currentEndTime.getTime() + 60 * 60 * 1000);
+      }
     } else {
-      const newArray = JSON.parse(getInfo);
-      newArray.push(storeEventInfo);
-      localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
+      eventBlocks.push(createEventBlock(startTime, endTime));
     }
 
+    const getInfo = localStorage.getItem(dateOfEvent);
+
+    let newArray;
+    if (getInfo === null) {
+      newArray = eventBlocks.map((block) => JSON.stringify(block));
+    } else {
+      newArray = JSON.parse(getInfo);
+      eventBlocks.forEach((block) => newArray.push(JSON.stringify(block)));
+    }
+
+    localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
+
+    setStartTime(null);
+    setEndTime(null);
+    setIsAvailableAppt(true);
+    setSplitIntoHourBlocks(false);
     setUpdateTrigger((prev) => !prev);
     closeModal();
   }
@@ -115,7 +156,6 @@ export function AddTimeBlockDisplay({
       </div>
       <div className="modal-form-container">
         <form className="form" onSubmit={addDatesToStorage}>
-          <h4 className="modal-form-date">{dateOfEvent}</h4>
           <div className="modal-form-input-container">
             <label className="text-label">Start Time:</label>
             <input
@@ -142,7 +182,14 @@ export function AddTimeBlockDisplay({
               <option value={false}>Closed</option>
             </select>
           </div>
-          {error && <div className="error-message">{error}</div>}
+          <div className="modal-form-input-container">
+            <label className="text-label">Split into 1-hour blocks:</label>
+            <input
+              type="checkbox"
+              onChange={(e) => setSplitIntoHourBlocks(e.target.checked)}
+            />
+          </div>
+          <div className="error-message">{error && error}</div>
           <button type="submit" className="submit-button">
             Save Schedule
           </button>

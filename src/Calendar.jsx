@@ -19,7 +19,9 @@ const Calendar = () => {
   const [isModalActive, setIsModalActive] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
-  const [dateOfEvent, setDateOfEvent] = useState(null);
+  const [dateOfEvent, setDateOfEvent] = useState(
+    format(new Date(), "MM/dd/yy")
+  );
   const [updateTrigger, setUpdateTrigger] = useState(false);
 
   // State for the current month
@@ -88,7 +90,7 @@ const Calendar = () => {
       }
     };
     searchLocalStorage();
-  }, [isAddScheduleModalActive, isModalActive]);
+  }, [isAddScheduleModalActive, isModalActive, updateTrigger]);
 
   return (
     <div className="calendar-main-container">
