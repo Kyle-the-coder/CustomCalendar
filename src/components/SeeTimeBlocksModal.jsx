@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { AddTimeBlockDisplay } from "./AddTimeBlockDisplay";
 
-export function SeeTimeBlocksModal({
-  setIsModalActive,
-  setIsSeeScheduleModalActive,
-  dateOfEvent,
-}) {
+export function SeeTimeBlocksModal({ setIsModalActive, dateOfEvent }) {
   const [fullScheduleList, setFullScheduleList] = useState([]);
   const [dayScheduleList, setDayScheduleList] = useState([]);
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);
@@ -16,11 +12,6 @@ export function SeeTimeBlocksModal({
     useState(false);
   const [updateTrigger, setUpdateTrigger] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  function closeModal() {
-    setIsSeeScheduleModalActive(false);
-    setIsModalActive(false);
-  }
 
   function handleAddTimeBlockModal() {
     setIsAddScheduleModalActive(true);
@@ -59,7 +50,6 @@ export function SeeTimeBlocksModal({
     });
   }, [fullScheduleList, updateTrigger]);
 
-  console.log(dayScheduleList.length === 0);
   return (
     <div className="see-timeblock-main-container">
       <div
@@ -71,19 +61,14 @@ export function SeeTimeBlocksModal({
         }}
       >
         <div className="tb-display-top">
-          <h1>Schedule for:</h1>
-          <h1>{dateOfEvent}</h1>
-          <img
-            src={close}
-            onClick={() => closeModal()}
-            className="tb-close-button"
-          />
+          <h3>Schedule for:</h3>
+          <h3>{dateOfEvent}</h3>
         </div>
         <div className="tb-sched-container">
           {dayScheduleList.length === 0 ? (
-            <h1 style={{ margin: "0 auto", marginTop: "35%" }}>
+            <h3 style={{ margin: "0 auto", marginTop: "35%" }}>
               No Time Blocks on this Date
-            </h1>
+            </h3>
           ) : (
             isSchedLoaded &&
             dayScheduleList.map((sched, index) => {
@@ -113,13 +98,13 @@ export function SeeTimeBlocksModal({
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <h2 className="tb">
+                  <h4 className="tb">
                     {startTime} - {endTime}
-                  </h2>
+                  </h4>
                   {sched.isAvailableAppt ? (
-                    <h2 className="tb-end">Available</h2>
+                    <h4 className="tb-end">Available</h4>
                   ) : (
-                    <h2 className="tb-end">Unavailable</h2>
+                    <h4 className="tb-end">Unavailable</h4>
                   )}
                 </div>
               );

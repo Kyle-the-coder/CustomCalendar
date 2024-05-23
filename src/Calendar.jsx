@@ -19,8 +19,6 @@ const Calendar = () => {
   const [isModalActive, setIsModalActive] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
-  const [isSeeScheduleModalActive, setIsSeeScheduleModalActive] =
-    useState(false);
   const [dateOfEvent, setDateOfEvent] = useState(null);
 
   // State for the current month
@@ -76,7 +74,6 @@ const Calendar = () => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate);
     setIsModalActive(true);
-    setIsSeeScheduleModalActive(true);
   };
 
   useEffect(() => {
@@ -89,7 +86,7 @@ const Calendar = () => {
       }
     };
     searchLocalStorage();
-  }, [isAddScheduleModalActive, isModalActive, isSeeScheduleModalActive]);
+  }, [isAddScheduleModalActive, isModalActive]);
 
   return (
     <div className="calendar-main-container">
@@ -134,7 +131,6 @@ const Calendar = () => {
       <div className="see-sched-main-container">
         <SeeTimeBlocksModal
           dateOfEvent={dateOfEvent}
-          setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
           setIsModalActive={setIsModalActive}
         />
       </div>
