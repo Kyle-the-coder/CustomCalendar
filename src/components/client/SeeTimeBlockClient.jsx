@@ -20,6 +20,10 @@ export function SeeTimeBlocksClient({
     setIsAddScheduleModalActive(true);
   }
 
+  function handleTimeBlockClick(sched) {
+    setTimeBlock(sched);
+  }
+
   useEffect(() => {
     const searchLocalStorage = () => {
       const keys = [];
@@ -62,6 +66,10 @@ export function SeeTimeBlocksClient({
     updateDayScheduleList();
   }, [fullScheduleList, dateOfEvent]);
 
+  useEffect(() => {
+    setTimeBlock("");
+  }, [dateOfEvent]);
+
   return (
     <div className="see-timeblock-main-container">
       <div className="timeblock-display-container">
@@ -85,20 +93,28 @@ export function SeeTimeBlocksClient({
                 new Date()
               );
               const startTime = format(startTimeParsed, "hh:mm a");
+              const isSelected =
+                timeBlock &&
+                sched.startTime === timeBlock.startTime &&
+                sched.endTime === timeBlock.endTime;
               return (
                 <div
                   key={index}
                   style={{
-                    backgroundColor:
-                      hoveredIndex === index
-                        ? sched.isAvailableAppt
-                          ? "rgb(78, 203, 78)"
-                          : "rgb(200, 62, 62)"
-                        : sched.isAvailableAppt
-                        ? "lightGreen"
-                        : "lightCoral",
+                    backgroundColor: isSelected
+                      ? sched.isAvailableAppt
+                        ? "darkGreen"
+                        : "darkRed"
+                      : hoveredIndex === index
+                      ? sched.isAvailableAppt
+                        ? "rgb(78, 203, 78)"
+                        : "rgb(200, 62, 62)"
+                      : sched.isAvailableAppt
+                      ? "lightGreen"
+                      : "lightCoral",
                   }}
-                  className="tb-container"
+                  className={`tb-container ${isSelected ? "selected-tb" : ""}`}
+                  onClick={() => handleTimeBlockClick(sched)}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -108,7 +124,7 @@ export function SeeTimeBlocksClient({
                   {sched.isAvailableAppt ? (
                     <h4 className="tb-end">Available</h4>
                   ) : (
-                    <h4 className="tb-end">Unavailable</h4>
+                    <h4 className="tb-end">Booked</h4>
                   )}
                 </div>
               );
@@ -119,6 +135,7 @@ export function SeeTimeBlocksClient({
           <button
             className="tb-submit-button"
             onClick={() => handleAddTimeBlockModal()}
+            disabled={!timeBlock || !timeBlock.isAvailableAppt} // Disable button conditionally
           >
             Book Now
           </button>
