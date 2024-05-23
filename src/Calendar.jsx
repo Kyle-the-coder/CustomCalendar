@@ -93,58 +93,51 @@ const Calendar = () => {
 
   return (
     <div className="calendar-main-container">
-      {isModalActive ? (
-        <>
-          {isSeeScheduleModalActive && (
-            <SeeTimeBlocksModal
-              dateOfEvent={dateOfEvent}
-              setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
-              setIsModalActive={setIsModalActive}
-            />
-          )}
-        </>
-      ) : (
-        <div className="calendar">
-          <div className="calendar-header">
-            <button onClick={goToPreviousMonth}>&lt;</button>
-            <h2>{format(startDateOfMonth, "MMMM yyyy")}</h2>
-            <button onClick={goToNextMonth}>&gt;</button>
-          </div>
-          <div className="calendar-grid">
-            {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
-              (day) => {
-                const formattedDate = format(day, "MM/dd/yy");
-                const hasEvent =
-                  fullScheduleList &&
-                  fullScheduleList.some(
-                    (schedule) => schedule === formattedDate
-                  );
-
-                return (
-                  <div
-                    key={day.toString()}
-                    className={`calendar-day ${
-                      !isSameMonth(day, startDateOfMonth) && "other-month"
-                    }`}
-                    onClick={() => handleSeeSchedClick(day)}
-                  >
-                    <div className={`calendar-day-num `}>
-                      <p
-                        className={`calendar-num ${
-                          isToday(day) && "current-day"
-                        }`}
-                      >
-                        {format(day, "d")}
-                      </p>
-                    </div>
-                    {hasEvent && <div className="full-schedule-circle"></div>}
-                  </div>
-                );
-              }
-            )}
-          </div>
+      <div className="calendar">
+        <div className="calendar-header">
+          <button onClick={goToPreviousMonth}>&lt;</button>
+          <h2>{format(startDateOfMonth, "MMMM yyyy")}</h2>
+          <button onClick={goToNextMonth}>&gt;</button>
         </div>
-      )}
+        <div className="calendar-grid">
+          {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
+            (day) => {
+              const formattedDate = format(day, "MM/dd/yy");
+              const hasEvent =
+                fullScheduleList &&
+                fullScheduleList.some((schedule) => schedule === formattedDate);
+
+              return (
+                <div
+                  key={day.toString()}
+                  className={`calendar-day ${
+                    !isSameMonth(day, startDateOfMonth) && "other-month"
+                  }`}
+                  onClick={() => handleSeeSchedClick(day)}
+                >
+                  <div className={`calendar-day-num `}>
+                    <p
+                      className={`calendar-num ${
+                        isToday(day) && "current-day"
+                      }`}
+                    >
+                      {format(day, "d")}
+                    </p>
+                  </div>
+                  {hasEvent && <div className="full-schedule-circle"></div>}
+                </div>
+              );
+            }
+          )}
+        </div>
+      </div>
+      <div className="see-sched-main-container">
+        <SeeTimeBlocksModal
+          dateOfEvent={dateOfEvent}
+          setIsSeeScheduleModalActive={setIsSeeScheduleModalActive}
+          setIsModalActive={setIsModalActive}
+        />
+      </div>
     </div>
   );
 };

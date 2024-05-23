@@ -1,31 +1,22 @@
 .see-timeblock-main-container {
-  width: 100%;
-  height: 70vh;
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  position: absolute;
-
-  top: 0;
-  left: 0;
 }
-
 .timeblock-display-container {
-  width: 500px;
+  width: 100%;
   z-index: 1;
-  height: 600px;
+  height: 100%;
   background-color: rgb(227, 222, 222);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
   box-sizing: border-box;
   transition: all 1.2s;
   position: relative;
-  box-shadow: 10px 15px 20px rgba(100, 100, 100, 0.5),
-    inset 3px 4px 2px rgba(255, 255, 255, 0.5);
 }
 
 .tb-display-top {
