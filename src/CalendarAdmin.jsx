@@ -12,7 +12,7 @@ import {
 import "./styles/calendar.css";
 import { SeeTimeBlocksModal } from "./components/SeeTimeBlocksModal";
 
-const Calendar = () => {
+const CalendarAdmin = () => {
   const [fullScheduleList, setFullScheduleList] = useState([]);
 
   //STATES FOR MODALS
@@ -144,4 +144,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarAdmin;

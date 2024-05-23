@@ -1,9 +1,9 @@
-import Calendar from "./Calendar";
+import CalendarAdmin from "./CalendarAdmin";
 import "./styles/main.css";
 function App() {
   return (
     <div className="main-container">
-      <Calendar />
+      <CalendarAdmin />
     </div>
   );
 }
