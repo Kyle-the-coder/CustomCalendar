@@ -130,6 +130,7 @@ export function SeeTimeBlocksModal({
               setIsAddScheduleModalActive={setIsAddScheduleModalActive}
               setUpdateTrigger={setUpdateTrigger}
               isAddScheduleModalActive={isAddScheduleModalActive}
+              dayScheduleList={dayScheduleList}
             />
           )}
         </div>

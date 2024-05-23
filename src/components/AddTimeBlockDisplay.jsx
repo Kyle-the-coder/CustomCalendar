@@ -7,11 +7,13 @@ export function AddTimeBlockDisplay({
   setIsAddScheduleModalActive,
   setUpdateTrigger,
   isAddScheduleModalActive,
+  dayScheduleList,
 }) {
   //STATES FOR FORM
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
+  const [error, setError] = useState(false);
 
   function closeModal() {
     const modal = document.querySelector(".modal-container");
@@ -37,12 +39,38 @@ export function AddTimeBlockDisplay({
 
   function addDatesToStorage(e) {
     e.preventDefault();
+
+    // Clear any previous errors
+    setError("");
+
+    // Validation: Ensure startTime is before endTime
+    if (startTime >= endTime) {
+      setError("Start time must be before end time.");
+      return;
+    }
+
+    // Validation: Ensure the time block doesn't already exist
+    const timeConflict = dayScheduleList.some((sched) => {
+      return (
+        (startTime >= sched.startTime && startTime < sched.endTime) ||
+        (endTime > sched.startTime && endTime <= sched.endTime) ||
+        (startTime <= sched.startTime && endTime >= sched.endTime)
+      );
+    });
+
+    if (timeConflict) {
+      setError("This time block conflicts with an existing one.");
+      return;
+    }
+
+    // If no validation errors, proceed to store the event
     const eventInfo = {
       endTime: endTime,
       startTime: startTime,
       dateOfEvent: dateOfEvent,
       isAvailableAppt: isAvailableAppt,
     };
+
     const storeEventInfo = JSON.stringify(eventInfo);
     const getInfo = localStorage.getItem(dateOfEvent);
 
@@ -54,6 +82,7 @@ export function AddTimeBlockDisplay({
       newArray.push(storeEventInfo);
       localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
     }
+
     setUpdateTrigger((prev) => !prev);
     closeModal();
   }
@@ -113,6 +142,7 @@ export function AddTimeBlockDisplay({
               <option value={false}>Closed</option>
             </select>
           </div>
+          {error && <div className="error-message">{error}</div>}
           <button type="submit" className="submit-button">
             Save Schedule
           </button>
