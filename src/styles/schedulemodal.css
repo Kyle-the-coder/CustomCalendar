@@ -9,9 +9,8 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   position: absolute;
-  top: 93%;
+  bottom: 100%;
   left: 50%;
-
   transform: translateX(-50%);
   visibility: hidden;
 }

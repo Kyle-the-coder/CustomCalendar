@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { AddTimeBlockDisplay } from "./AddTimeBlockDisplay";
 
-export function SeeTimeBlocksModal({ setIsModalActive, dateOfEvent }) {
+export function SeeTimeBlocksModal({
+  setIsModalActive,
+  setUpdateTrigger,
+  dateOfEvent,
+}) {
   const [fullScheduleList, setFullScheduleList] = useState([]);
   const [dayScheduleList, setDayScheduleList] = useState([]);
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
-  const [updateTrigger, setUpdateTrigger] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   function handleAddTimeBlockModal() {
@@ -30,25 +33,29 @@ export function SeeTimeBlocksModal({ setIsModalActive, dateOfEvent }) {
   }, [isAddScheduleModalActive]);
 
   useEffect(() => {
-    fullScheduleList.forEach((date) => {
-      if (date === dateOfEvent) {
-        const eventList = localStorage.getItem(dateOfEvent);
-        if (eventList) {
-          try {
-            const parsedList = JSON.parse(eventList);
-            const events = parsedList.map((item) => JSON.parse(item));
-            setDayScheduleList(events);
-            setIsSchedLoaded(true);
-          } catch (error) {
-            console.error("Error parsing JSON data from localStorage", error);
+    const updateDayScheduleList = () => {
+      if (dateOfEvent) {
+        if (fullScheduleList.includes(dateOfEvent)) {
+          const eventList = localStorage.getItem(dateOfEvent);
+          if (eventList) {
+            try {
+              const parsedList = JSON.parse(eventList);
+              const events = parsedList.map((item) => JSON.parse(item));
+              setDayScheduleList(events);
+              setIsSchedLoaded(true);
+            } catch (error) {
+              console.error("Error parsing JSON data from localStorage", error);
+            }
           }
         } else {
           setDayScheduleList([]);
           setIsSchedLoaded(true);
         }
       }
-    });
-  }, [fullScheduleList, updateTrigger]);
+    };
+
+    updateDayScheduleList();
+  }, [fullScheduleList, dateOfEvent]);
 
   return (
     <div className="see-timeblock-main-container">
@@ -79,7 +86,6 @@ export function SeeTimeBlocksModal({ setIsModalActive, dateOfEvent }) {
                 "HH:mm",
                 new Date()
               );
-              console.log("sched", sched.isAvailableAppt);
               const startTime = format(startTimeParsed, "hh:mm a");
               return (
                 <div
@@ -118,16 +124,16 @@ export function SeeTimeBlocksModal({ setIsModalActive, dateOfEvent }) {
           >
             Add Time Block
           </button>
+          {isAddScheduleModalActive && (
+            <AddTimeBlockDisplay
+              dateOfEvent={dateOfEvent}
+              setIsAddScheduleModalActive={setIsAddScheduleModalActive}
+              setUpdateTrigger={setUpdateTrigger}
+              isAddScheduleModalActive={isAddScheduleModalActive}
+            />
+          )}
         </div>
       </div>
-      {isAddScheduleModalActive && (
-        <AddTimeBlockDisplay
-          dateOfEvent={dateOfEvent}
-          setIsAddScheduleModalActive={setIsAddScheduleModalActive}
-          setUpdateTrigger={setUpdateTrigger}
-          isAddScheduleModalActive={isAddScheduleModalActive}
-        />
-      )}
     </div>
   );
 }

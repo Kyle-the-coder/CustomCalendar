@@ -20,6 +20,7 @@ const Calendar = () => {
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [dateOfEvent, setDateOfEvent] = useState(null);
+  const [updateTrigger, setUpdateTrigger] = useState(false);
 
   // State for the current month
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -74,6 +75,7 @@ const Calendar = () => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate);
     setIsModalActive(true);
+    setUpdateTrigger(!updateTrigger);
   };
 
   useEffect(() => {
@@ -132,6 +134,8 @@ const Calendar = () => {
         <SeeTimeBlocksModal
           dateOfEvent={dateOfEvent}
           setIsModalActive={setIsModalActive}
+          updateTrigger={updateTrigger}
+          setUpdateTrigger={setUpdateTrigger}
         />
       </div>
     </div>

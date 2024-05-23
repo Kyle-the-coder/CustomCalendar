@@ -19,14 +19,12 @@ export function AddTimeBlockDisplay({
       gsap.fromTo(
         modal,
         {
-          y: "0%",
+          x: "0%",
           duration: 1.2,
-          ease: "power3.inOut",
-          boxShadow:
-            "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
+          ease: "power4.inOut",
         },
         {
-          y: "-100%",
+          x: "100%",
           visibility: "visible",
           boxShadow: "none",
           onComplete: () => {
@@ -65,13 +63,11 @@ export function AddTimeBlockDisplay({
       const modal = document.querySelector(".modal-container");
       gsap.fromTo(
         modal,
-        { y: "-100%", visibility: "visible", boxShadow: "none" },
+        { x: "100%", visibility: "visible", boxShadow: "none" },
         {
-          y: "0%",
+          x: "0%",
           duration: 1.2,
-          ease: "power3.inOut",
-          boxShadow:
-            "10px 15px 20px rgba(100, 100, 100, 0.5), inset 3px -1px 2px rgba(255, 255, 255, 0.5)",
+          ease: "power4.out",
         }
       );
     }
