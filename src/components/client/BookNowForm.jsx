@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import close from "../../assets/close.png";
-import "../../styles/schedulemodal.css";
+import "./clientstyles/booknowform.css";
 import gsap from "gsap";
+
 export function BookNowForm({
   dateOfEvent,
   setIsAddScheduleModalActive,
@@ -19,7 +20,7 @@ export function BookNowForm({
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
 
   function closeModal() {
-    const modal = document.querySelector(".modal-container");
+    const modal = document.querySelector(".book-now-main-container");
     if (modal) {
       gsap.fromTo(
         modal,
@@ -80,7 +81,7 @@ export function BookNowForm({
 
   useEffect(() => {
     if (isAddScheduleModalActive) {
-      const modal = document.querySelector(".modal-container");
+      const modal = document.querySelector(".book-now-main-container");
       gsap.fromTo(
         modal,
         { x: "100%", visibility: "visible", boxShadow: "none" },
@@ -101,50 +102,51 @@ export function BookNowForm({
     : "";
 
   return (
-    <div className="modal-container">
-      <div className="modal-top">
+    <div className="book-now-main-container">
+      <div className="book-now-top-container">
         <h1>Enter Appt. Info</h1>
 
         <img
           src={close}
           onClick={() => closeModal()}
-          className="modal-close-button"
+          className="book-now-close-button"
         />
       </div>
-      <div className="modal-form-container">
-        <form className="form" onSubmit={addClientToTimeBlock}>
-          <div className="modal-form-input-container">
+      <div className="book-now-form-container">
+        <form className="book-now-form" onSubmit={addClientToTimeBlock}>
+          <div className="book-now-form-input-container">
             <h2>
               Time: {displayStartTime}-{displayEndTime}
             </h2>
           </div>
-          <div className="modal-form-input-container">
-            <label className="text-label">Name:</label>
+          <div className="book-now-form-input-container">
+            <label className="book-now-text-label">Name:</label>
             <input
               type="text"
-              className="text-input"
+              className="book-now-text-input"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="modal-form-input-container">
-            <label className="text-label">Email:</label>
+          <div className="book-now-form-input-container">
+            <label className="book-now-text-label">Email:</label>
             <input
               type="text"
-              className="text-input"
+              className="book-now-text-input"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="modal-form-input-container">
-            <label className="text-label">Description:</label>
+          <div className="book-now-form-area-container">
+            <label className="book-now-text-label">Description:</label>
             <textarea
               type="text"
-              className="text-input"
+              rows="3"
+              className="book-now-area-input"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div className="error-message">{error && error}</div>
-          <button type="submit" className="submit-button">
+          <button type="submit" className="book-now-submit-button">
             Book Appointment
           </button>
         </form>

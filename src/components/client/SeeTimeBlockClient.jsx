@@ -1,4 +1,4 @@
-import "../../styles/seeschedulemodal.css";
+import "./clientstyles/booknowform.css";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { BookNowForm } from "./BookNowForm";
