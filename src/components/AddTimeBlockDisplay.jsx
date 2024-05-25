@@ -43,7 +43,6 @@ export function AddTimeBlockDisplay({
       );
     }
   }
-
   function addDatesToStorage(e) {
     e.preventDefault();
 
@@ -114,7 +113,7 @@ export function AddTimeBlockDisplay({
     } else {
       eventBlocks.push(createEventBlock(startTime, endTime, dateOfEvent));
     }
-    console.log(extendDate);
+
     // If extendDate is set, add event blocks for each date from dateOfEvent to extendDate
     if (extendDate.extendDate) {
       let currentDate = new Date(dateOfEvent);
@@ -122,16 +121,30 @@ export function AddTimeBlockDisplay({
       endDate.setDate(endDate.getDate() + 1);
       while (currentDate <= endDate) {
         const date = format(currentDate, "MM/dd/yy");
+        const existingBlocksJSON = localStorage.getItem(date);
+        let existingBlocks = [];
+        if (existingBlocksJSON) {
+          existingBlocks = JSON.parse(existingBlocksJSON);
+        }
         const dateEventBlocks = eventBlocks.map((block) => ({
           ...block,
           dateOfEvent: date,
         }));
-        localStorage.setItem(date, JSON.stringify(dateEventBlocks));
+        const updatedBlocks = [...existingBlocks, ...dateEventBlocks];
+        localStorage.setItem(date, JSON.stringify(updatedBlocks));
         currentDate.setDate(currentDate.getDate() + 1);
       }
     } else {
       // If extendDate is not set, save the event blocks for the dateOfEvent only
-      localStorage.setItem(dateOfEvent, JSON.stringify(eventBlocks));
+      const existingBlocksJSON = localStorage.getItem(dateOfEvent);
+      if (existingBlocksJSON) {
+        const existingBlocks = JSON.parse(existingBlocksJSON);
+        const updatedBlocks = [...existingBlocks, ...eventBlocks];
+        localStorage.setItem(dateOfEvent, JSON.stringify(updatedBlocks));
+      } else {
+        // If data doesn't exist, save the event blocks for the dateOfEvent only
+        localStorage.setItem(dateOfEvent, JSON.stringify(eventBlocks));
+      }
     }
 
     setStartTime(null);
