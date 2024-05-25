@@ -136,10 +136,10 @@ export function BookNowForm({
             />
           </div>
           <div className="book-now-form-area-container">
-            <label className="book-now-text-label">Description:</label>
+            <label className="book-now-area-label">Description:</label>
             <textarea
               type="text"
-              rows="3"
+              rows="7"
               className="book-now-area-input"
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { BookNowForm } from "./BookNowForm";
 
-export function SeeTimeBlocksClient({
-  setIsModalActive,
-  setUpdateTrigger,
-  dateOfEvent,
-}) {
+export function SeeTimeBlocksClient({ setUpdateTrigger, dateOfEvent }) {
   const [fullScheduleList, setFullScheduleList] = useState([]);
   const [dayScheduleList, setDayScheduleList] = useState([]);
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);
