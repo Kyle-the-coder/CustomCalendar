@@ -76,7 +76,6 @@ const CalendarAdmin = () => {
   const handleSeeSchedClick = (date) => {
     const formattedDate = format(date, "MM/dd/yy");
     setDateOfEvent(formattedDate);
-    setIsModalActive(true);
     setUpdateTrigger(!updateTrigger);
   };
 
@@ -90,7 +89,7 @@ const CalendarAdmin = () => {
       }
     };
     searchLocalStorage();
-  }, [isAddScheduleModalActive, isModalActive, updateTrigger]);
+  }, [isAddScheduleModalActive, updateTrigger]);
 
   return (
     <div className="calendar-main-container">
@@ -135,7 +134,6 @@ const CalendarAdmin = () => {
       <div className="see-sched-main-container">
         <SeeTimeBlocksModal
           dateOfEvent={dateOfEvent}
-          setIsModalActive={setIsModalActive}
           updateTrigger={updateTrigger}
           setUpdateTrigger={setUpdateTrigger}
         />
