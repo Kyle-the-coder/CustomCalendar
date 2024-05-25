@@ -1,4 +1,4 @@
-.calendar-main-container {
+.calendar-client-main-container {
   width: 100%;
   background-color: #979797;
   height: 70vh;
@@ -9,7 +9,7 @@
     inset 3px 4px 2px rgba(255, 255, 255, 0.5);
 }
 
-.calendar {
+.calendar-client {
   font-family: Arial, sans-serif;
   background-color: whitesmoke;
   padding: 0px 10px;
@@ -20,7 +20,7 @@
   flex-direction: column;
   flex-grow: 1;
 }
-.see-sched-main-container {
+.see-tbc-main-container {
   width: 35%;
   height: 100%;
   background-color: aqua;
@@ -30,27 +30,27 @@
   flex-grow: 1;
 }
 
-.calendar-header {
+.calendar-client-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.calendar-header button {
+.calendar-client-header button {
   background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: 1.5rem;
 }
 
-.calendar-grid {
+.calendar-client-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
 }
 
-.calendar-day {
+.calendar-client-day {
   border: 1px solid #ccc;
   display: flex;
   padding: 5px;
@@ -65,37 +65,37 @@
   position: relative;
 }
 
-.calendar-day-num {
+.calendar-client-day-num {
   width: 100%;
   height: 30%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.calendar-day:hover {
+.calendar-client-day:hover {
   background-color: #3690de98;
 }
 
-.other-month {
+.cc-other-month {
   color: #979797;
 }
-.no-event {
+.cc-no-event {
   color: #979797;
   background-color: #e5e5e5;
 }
 
-.current-day {
+.cc-current-day {
   background-color: rgb(179, 243, 111);
   border-radius: 50%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.calendar-num {
+.calendar-client-num {
   margin: 0;
   padding: 5px;
 }
-.full-schedule-circle {
+.cc-full-schedule-circle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -104,11 +104,4 @@
   background-color: #04acf42f;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-}
-
-.modal-form-date {
-  font-size: 2rem;
-  height: fit-content;
-  margin: 0;
-  text-align: center;
 }

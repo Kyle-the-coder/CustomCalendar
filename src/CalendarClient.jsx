@@ -9,7 +9,7 @@ import {
   isSameMonth,
   isToday,
 } from "date-fns";
-import "./styles/calendar.css";
+import "./styles/calendarclient.css";
 import { SeeTimeBlocksClient } from "./components/client/SeeTimeBlockClient";
 
 const CalendarClient = () => {
@@ -93,14 +93,17 @@ const CalendarClient = () => {
   }, [isAddScheduleModalActive, isModalActive, updateTrigger]);
 
   return (
-    <div className="calendar-main-container" style={{ marginBottom: "10%" }}>
-      <div className="calendar">
-        <div className="calendar-header">
+    <div
+      className="calendar-client-main-container"
+      style={{ marginBottom: "10%" }}
+    >
+      <div className="calendar-client">
+        <div className="calendar-client-header">
           <button onClick={goToPreviousMonth}>&lt;</button>
           <h2>{format(startDateOfMonth, "MMMM yyyy")}</h2>
           <button onClick={goToNextMonth}>&gt;</button>
         </div>
-        <div className="calendar-grid">
+        <div className="calendar-client-grid">
           {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
             (day) => {
               const formattedDate = format(day, "MM/dd/yy");
@@ -111,28 +114,28 @@ const CalendarClient = () => {
               return (
                 <div
                   key={day.toString()}
-                  className={`calendar-day ${
-                    !isSameMonth(day, startDateOfMonth) && "other-month"
-                  }  ${!hasEvent && "no-event"}`}
+                  className={`calendar-client-day ${
+                    !isSameMonth(day, startDateOfMonth) && "cc-other-month"
+                  }  ${!hasEvent && "cc-no-event"}`}
                   onClick={() => handleSeeSchedClick(day)}
                 >
-                  <div className={`calendar-day-num `}>
+                  <div className={`calendar-client-day-num `}>
                     <p
-                      className={`calendar-num ${
-                        isToday(day) && "current-day"
+                      className={`calendar-client-num ${
+                        isToday(day) && "cc-current-day"
                       }`}
                     >
                       {format(day, "d")}
                     </p>
                   </div>
-                  {hasEvent && <div className="full-schedule-circle"></div>}
+                  {hasEvent && <div className="cc-full-schedule-circle"></div>}
                 </div>
               );
             }
           )}
         </div>
       </div>
-      <div className="see-sched-main-container">
+      <div className="see-tbc-main-container">
         <SeeTimeBlocksClient
           dateOfEvent={dateOfEvent}
           setIsModalActive={setIsModalActive}
