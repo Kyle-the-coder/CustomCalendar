@@ -1,4 +1,4 @@
-import "./clientstyles/booknowform.css";
+import "./clientstyles/seetimeblockclient.css";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { BookNowForm } from "./BookNowForm";
@@ -71,13 +71,13 @@ export function SeeTimeBlocksClient({
   }, [dateOfEvent]);
 
   return (
-    <div className="see-timeblock-main-container">
-      <div className="timeblock-display-container">
-        <div className="tb-display-top">
+    <div className="see-timeblock-client-main-container">
+      <div className="timeblock-client-display-container">
+        <div className="tbc-display-top">
           <h1>Schedule for:</h1>
           <h1>{dateOfEvent}</h1>
         </div>
-        <div className="tb-sched-container">
+        <div className="tbc-sched-container">
           {dayScheduleList.length === 0 ? (
             <h3 style={{ margin: "0 auto", marginTop: "35%" }}>
               No Time Blocks on this Date
@@ -113,27 +113,29 @@ export function SeeTimeBlocksClient({
                       ? "lightGreen"
                       : "lightCoral",
                   }}
-                  className={`tb-container ${isSelected ? "selected-tb" : ""}`}
+                  className={`tbc-container ${
+                    isSelected ? "selected-tbc" : ""
+                  }`}
                   onClick={() => handleTimeBlockClick(sched)}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <h4 className="tb">
+                  <h4 className="tbc">
                     {startTime} - {endTime}
                   </h4>
                   {sched.isAvailableAppt ? (
-                    <h4 className="tb-end">Available</h4>
+                    <h4 className="tbc-end">Available</h4>
                   ) : (
-                    <h4 className="tb-end">Booked</h4>
+                    <h4 className="tbc-end">Booked</h4>
                   )}
                 </div>
               );
             })
           )}
         </div>
-        <div className="add-schedule-button-container">
+        <div className="book-now-button-container">
           <button
-            className="tb-submit-button"
+            className="tbc-submit-button"
             onClick={() => handleAddTimeBlockModal()}
             disabled={!timeBlock || !timeBlock.isAvailableAppt} // Disable button conditionally
           >

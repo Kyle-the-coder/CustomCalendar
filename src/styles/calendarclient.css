@@ -1,0 +1,114 @@
+.calendar-main-container {
+  width: 100%;
+  background-color: #979797;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 10px 15px 20px rgba(100, 100, 100, 0.5),
+    inset 3px 4px 2px rgba(255, 255, 255, 0.5);
+}
+
+.calendar {
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  padding: 0px 10px;
+  width: 65%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.see-sched-main-container {
+  width: 35%;
+  height: 100%;
+  background-color: aqua;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+
+.calendar-day {
+  border: 1px solid #ccc;
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 100%;
+  cursor: pointer;
+  height: 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.calendar-day-num {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.calendar-day:hover {
+  background-color: #3690de98;
+}
+
+.other-month {
+  color: #979797;
+}
+.no-event {
+  color: #979797;
+  background-color: #e5e5e5;
+}
+
+.current-day {
+  background-color: rgb(179, 243, 111);
+  border-radius: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.calendar-num {
+  margin: 0;
+  padding: 5px;
+}
+.full-schedule-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 67%;
+  height: 67%;
+  background-color: #04acf42f;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-form-date {
+  font-size: 2rem;
+  height: fit-content;
+  margin: 0;
+  text-align: center;
+}

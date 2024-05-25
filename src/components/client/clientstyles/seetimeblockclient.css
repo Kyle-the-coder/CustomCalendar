@@ -1,11 +1,11 @@
-.see-timeblock-main-container {
+.see-timeblock-client-main-container {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
 }
-.timeblock-display-container {
+.timeblock-client-display-container {
   width: 100%;
   z-index: 1;
   height: 100%;
@@ -17,7 +17,7 @@
   box-sizing: border-box;
 }
 
-.tb-display-top {
+.tbc-display-top {
   width: 100%;
   height: 15%;
   display: flex;
@@ -25,13 +25,13 @@
   align-items: center;
 }
 
-.tb-close-button {
+.tbc-close-button {
   width: 30px;
   height: 30px;
   cursor: pointer;
 }
 
-.tb-sched-container {
+.tbc-sched-container {
   width: 100%;
   height: 80%;
   overflow-y: scroll;
@@ -42,7 +42,7 @@
   justify-content: flex-start;
 }
 
-.tb-container {
+.tbc-container {
   width: 90%;
   height: fit-content;
   display: flex;
@@ -58,20 +58,20 @@
     inset 3px 4px 2px rgba(255, 255, 255, 0.5);
 }
 
-.selected-tb {
+.selected-tbc {
   opacity: 100%;
   background-color: rgb(78, 203, 78);
   color: white;
 }
 
-.tb {
+.tbc {
   margin-left: 2%;
 }
-.tb-end {
+.tbc-end {
   margin-right: 2%;
 }
 
-.tb-submit-button {
+.tbc-submit-button {
   padding: 8px 20px 8px 20px;
   background-color: rgb(145, 183, 253);
   font-size: 1.5rem;
@@ -82,19 +82,15 @@
   cursor: pointer;
   transition: all 0.7s;
 }
-.tb-submit-button:hover {
+.tbc-submit-button:hover {
   background-color: rgb(173, 199, 252);
 }
 
-.add-schedule-button-container {
+.book-now-button-container {
   width: 100%;
   height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-}
-
-.free {
-  background-color: rgb(78, 203, 78);
 }
