@@ -112,10 +112,10 @@ export function AddTimeBlockDisplay({
 
     let newArray;
     if (getInfo === null) {
-      newArray = eventBlocks.map((block) => JSON.stringify(block));
+      newArray = eventBlocks.map((block) => block);
     } else {
       newArray = JSON.parse(getInfo);
-      eventBlocks.forEach((block) => newArray.push(JSON.stringify(block)));
+      eventBlocks.forEach((block) => newArray.push(block));
     }
 
     localStorage.setItem(dateOfEvent, JSON.stringify(newArray));

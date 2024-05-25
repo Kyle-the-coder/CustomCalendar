@@ -40,8 +40,7 @@ export function SeeTimeBlocksModal({
           if (eventList) {
             try {
               const parsedList = JSON.parse(eventList);
-              const events = parsedList.map((item) => JSON.parse(item));
-              events.sort((a, b) => {
+              const events = parsedList.sort((a, b) => {
                 const timeA = parse(a.startTime, "HH:mm", new Date());
                 const timeB = parse(b.startTime, "HH:mm", new Date());
                 return timeA - timeB;

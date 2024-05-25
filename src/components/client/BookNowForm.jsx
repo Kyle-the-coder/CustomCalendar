@@ -44,38 +44,42 @@ export function BookNowForm({
   function addClientToTimeBlock(e) {
     e.preventDefault();
 
-    // Clear any previous errors
-    setError("");
-
-    // Helper function to create event blocks
-    const createEventBlock = {
-      dateOfEvent: dateOfEvent,
-      isAvailableAppt: isAvailableAppt,
-      name: name,
-      email: email,
-      description: description,
-    };
-
+    // Retrieve the array of objects from localStorage
     const getInfo = localStorage.getItem(dateOfEvent);
+    if (getInfo) {
+      const eventArray = JSON.parse(getInfo);
 
-    let newArray;
-    if (getInfo === null) {
-      newArray = eventBlocks.map((block) => JSON.stringify(block));
-    } else {
-      newArray = JSON.parse(getInfo);
-      eventBlocks.forEach((block) => newArray.push(JSON.stringify(block)));
+      // Find the object that matches the timeBlock
+      const updatedArray = eventArray.map((block) => {
+        console.log(typeof block);
+        if (
+          block.startTime === timeBlock.startTime &&
+          block.endTime === timeBlock.endTime
+        ) {
+          // Update the object with new data
+          return {
+            ...block,
+            name: name,
+            email: email,
+            description: description,
+            isAvailableAppt: false,
+          };
+        }
+        return block;
+      });
+
+      console.log(updatedArray);
+
+      // Save the updated array back to localStorage
+      localStorage.setItem(dateOfEvent, JSON.stringify(updatedArray));
+      setUpdateTrigger((prev) => !prev);
     }
 
-    localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
-
+    // Clear form fields and close modal
     setName("");
     setEmail("");
     setDescription("");
-    setStartTime(null);
-    setEndTime(null);
     setIsAvailableAppt(true);
-    setSplitIntoHourBlocks(false);
-    setUpdateTrigger((prev) => !prev);
     closeModal();
   }
 
@@ -141,7 +145,7 @@ export function BookNowForm({
               type="text"
               rows="7"
               className="book-now-area-input"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
 
