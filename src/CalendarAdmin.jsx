@@ -15,10 +15,7 @@ import { SeeTimeBlocksModal } from "./components/SeeTimeBlocksModal";
 const CalendarAdmin = () => {
   const [fullScheduleList, setFullScheduleList] = useState([]);
 
-  //STATES FOR MODALS
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
-    useState(false);
+  //CURRENT DATE TRACKER
   const [dateOfEvent, setDateOfEvent] = useState(
     format(new Date(), "MM/dd/yy")
   );
@@ -89,7 +86,7 @@ const CalendarAdmin = () => {
       }
     };
     searchLocalStorage();
-  }, [isAddScheduleModalActive, updateTrigger]);
+  }, [updateTrigger]);
 
   return (
     <div className="calendar-main-container">
