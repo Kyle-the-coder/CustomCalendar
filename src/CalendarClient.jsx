@@ -36,31 +36,13 @@ const CalendarClient = () => {
   // Calculate the number of days in the month
   const daysInMonth = getDaysInMonth(currentMonth);
 
-  // Generate an array of dates for the entire month
-  const allDaysOfMonth = [...Array(daysInMonth)].map((_, index) =>
-    addDays(startDateOfWeek, index)
-  );
+  // Generate an array of dates for the entire grid (including previous and next month)
+  const allDaysInGrid = [];
+  let currentDay = startDateOfWeek;
 
-  // Fill in days from the previous month
-  const previousMonthDays = [];
-  if (startDateOfWeek.getDate() !== 1) {
-    const daysToAdd = startDateOfWeek.getDay() - 1;
-    const previousMonthStart = subDays(startDateOfWeek, daysToAdd);
-    for (let i = 0; i < daysToAdd; i++) {
-      previousMonthDays.push(subDays(previousMonthStart, i));
-    }
-  }
-
-  // Fill in days from the next month
-  const nextMonthDays = [];
-  const totalDaysDisplayed = allDaysOfMonth.length + previousMonthDays.length;
-  const remainingDays = 35 - totalDaysDisplayed;
-  const endDate = addDays(
-    allDaysOfMonth[allDaysOfMonth.length - 1],
-    remainingDays
-  );
-  for (let i = 1; i <= remainingDays; i++) {
-    nextMonthDays.push(addDays(endDate, i));
+  while (allDaysInGrid.length < 35) {
+    allDaysInGrid.push(currentDay);
+    currentDay = addDays(currentDay, 1);
   }
 
   // Function to navigate to the previous month
@@ -104,35 +86,33 @@ const CalendarClient = () => {
           <button onClick={goToNextMonth}>&gt;</button>
         </div>
         <div className="calendar-client-grid">
-          {[...previousMonthDays, ...allDaysOfMonth, ...nextMonthDays].map(
-            (day) => {
-              const formattedDate = format(day, "MM/dd/yy");
-              const hasEvent =
-                fullScheduleList &&
-                fullScheduleList.some((schedule) => schedule === formattedDate);
+          {allDaysInGrid.map((day, index) => {
+            const formattedDate = format(day, "MM/dd/yy");
+            const hasEvent =
+              fullScheduleList &&
+              fullScheduleList.some((schedule) => schedule === formattedDate);
 
-              return (
-                <div
-                  key={day.toString()}
-                  className={`calendar-client-day ${
-                    !isSameMonth(day, startDateOfMonth) && "cc-other-month"
-                  }  ${!hasEvent && "cc-no-event"}`}
-                  onClick={() => handleSeeSchedClick(day)}
-                >
-                  <div className={`calendar-client-day-num `}>
-                    <p
-                      className={`calendar-client-num ${
-                        isToday(day) && "cc-current-day"
-                      }`}
-                    >
-                      {format(day, "d")}
-                    </p>
-                  </div>
-                  {hasEvent && <div className="cc-full-schedule-circle"></div>}
+            return (
+              <div
+                key={index}
+                className={`calendar-client-day ${
+                  !isSameMonth(day, startDateOfMonth) && "cc-other-month"
+                }  ${!hasEvent && "cc-no-event"}`}
+                onClick={() => handleSeeSchedClick(day)}
+              >
+                <div className={`calendar-client-day-num `}>
+                  <p
+                    className={`calendar-client-num ${
+                      isToday(day) ? "cc-current-day" : ""
+                    }`}
+                  >
+                    {format(day, "d")}
+                  </p>
                 </div>
-              );
-            }
-          )}
+                {hasEvent && <div className="cc-full-schedule-circle"></div>}
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="see-tbc-main-container">

@@ -78,6 +78,7 @@
 
 .other-month {
   color: #979797;
+  background-color: #e4e4e4;
 }
 .no-event {
   color: #979797;
@@ -111,4 +112,8 @@
   height: fit-content;
   margin: 0;
   text-align: center;
+}
+
+.highlighted {
+  background-color: rgb(255, 255, 174);
 }

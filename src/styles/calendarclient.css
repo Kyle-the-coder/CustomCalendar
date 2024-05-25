@@ -76,12 +76,13 @@
   background-color: #3690de98;
 }
 
-.cc-other-month {
-  color: #979797;
-}
 .cc-no-event {
   color: #979797;
   background-color: #e5e5e5;
+}
+.cc-other-month {
+  color: #979797;
+  background-color: #cccccc;
 }
 
 .cc-current-day {

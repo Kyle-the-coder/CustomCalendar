@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import close from "../assets/close.png";
 import "../styles/schedulemodal.css";
 import gsap from "gsap";
+import { ExtendDateContext, useExtendDate } from "./context/ExtendDateContext";
+import { format } from "date-fns";
+
 export function AddTimeBlockDisplay({
   dateOfEvent,
   setIsAddScheduleModalActive,
@@ -15,6 +18,9 @@ export function AddTimeBlockDisplay({
   const [isAvailableAppt, setIsAvailableAppt] = useState(true);
   const [error, setError] = useState(false);
   const [splitIntoHourBlocks, setSplitIntoHourBlocks] = useState(false);
+  const { setExtendDate } = useExtendDate();
+
+  const extendDate = useContext(ExtendDateContext);
 
   function closeModal() {
     const modal = document.querySelector(".modal-container");
@@ -76,10 +82,10 @@ export function AddTimeBlockDisplay({
     }
 
     // Helper function to create event blocks
-    const createEventBlock = (start, end) => ({
+    const createEventBlock = (start, end, date) => ({
       endTime: end,
       startTime: start,
-      dateOfEvent: dateOfEvent,
+      dateOfEvent: date,
       isAvailableAppt: isAvailableAppt,
     });
 
@@ -95,7 +101,8 @@ export function AddTimeBlockDisplay({
         eventBlocks.push(
           createEventBlock(
             currentStartTime.toTimeString().slice(0, 5),
-            currentEndTime.toTimeString().slice(0, 5)
+            currentEndTime.toTimeString().slice(0, 5),
+            dateOfEvent
           )
         );
 
@@ -105,25 +112,33 @@ export function AddTimeBlockDisplay({
         currentEndTime = new Date(currentEndTime.getTime() + 60 * 60 * 1000);
       }
     } else {
-      eventBlocks.push(createEventBlock(startTime, endTime));
+      eventBlocks.push(createEventBlock(startTime, endTime, dateOfEvent));
     }
-
-    const getInfo = localStorage.getItem(dateOfEvent);
-
-    let newArray;
-    if (getInfo === null) {
-      newArray = eventBlocks.map((block) => block);
+    console.log(extendDate);
+    // If extendDate is set, add event blocks for each date from dateOfEvent to extendDate
+    if (extendDate.extendDate) {
+      let currentDate = new Date(dateOfEvent);
+      const endDate = new Date(extendDate.extendDate);
+      endDate.setDate(endDate.getDate() + 1);
+      while (currentDate <= endDate) {
+        const date = format(currentDate, "MM/dd/yy");
+        const dateEventBlocks = eventBlocks.map((block) => ({
+          ...block,
+          dateOfEvent: date,
+        }));
+        localStorage.setItem(date, JSON.stringify(dateEventBlocks));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
     } else {
-      newArray = JSON.parse(getInfo);
-      eventBlocks.forEach((block) => newArray.push(block));
+      // If extendDate is not set, save the event blocks for the dateOfEvent only
+      localStorage.setItem(dateOfEvent, JSON.stringify(eventBlocks));
     }
-
-    localStorage.setItem(dateOfEvent, JSON.stringify(newArray));
 
     setStartTime(null);
     setEndTime(null);
     setIsAvailableAppt(true);
     setSplitIntoHourBlocks(false);
+    setExtendDate(null);
     setUpdateTrigger((prev) => !prev);
     closeModal();
   }
@@ -187,6 +202,15 @@ export function AddTimeBlockDisplay({
             <input
               type="checkbox"
               onChange={(e) => setSplitIntoHourBlocks(e.target.checked)}
+            />
+          </div>
+          <div className="modal-form-input-container">
+            <label className="text-label">Extend Date:</label>
+            <input
+              type="date"
+              className="text-input"
+              value={format(dateOfEvent, "yyyy-MM-dd")}
+              onChange={(e) => setExtendDate(e.target.value)}
             />
           </div>
           <div className="error-message">{error && error}</div>
