@@ -103,7 +103,7 @@ export function SeeTimeBlocksModal({ setUpdateTrigger, dateOfEvent }) {
                   {sched.isAvailableAppt ? (
                     <h4 className="tb-end">Available</h4>
                   ) : (
-                    <h4 className="tb-end">Unavailable</h4>
+                    <h4 className="tb-end">Booked</h4>
                   )}
                 </div>
               );

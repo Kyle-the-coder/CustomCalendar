@@ -75,7 +75,7 @@ export function SeeTimeBlocksClient({ setUpdateTrigger, dateOfEvent }) {
         <div className="tbc-sched-container">
           {dayScheduleList.length === 0 ? (
             <h3 style={{ margin: "0 auto", marginTop: "35%" }}>
-              No Time Blocks on this Date
+              No Appointments on this Date
             </h3>
           ) : (
             isSchedLoaded &&
