@@ -101,6 +101,10 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
     }
   }
 
+  useEffect(() => {
+    setTimeBlock("");
+  }, [dateOfEvent]);
+
   return (
     <div className="see-timeblock-main-container">
       <div className="timeblock-display-container">
