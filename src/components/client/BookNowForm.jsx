@@ -10,6 +10,7 @@ export function BookNowForm({
   setUpdateTrigger,
   isAddScheduleModalActive,
   timeBlock,
+  setTimeBlock,
 }) {
   //STATES FOR FORM
   const [error, setError] = useState("");
@@ -78,6 +79,7 @@ export function BookNowForm({
     setName("");
     setEmail("");
     setDescription("");
+    setTimeBlock("");
     setIsAvailableAppt(true);
     closeModal();
   }

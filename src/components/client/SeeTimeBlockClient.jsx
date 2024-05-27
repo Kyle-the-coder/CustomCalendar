@@ -11,6 +11,7 @@ export function SeeTimeBlocksClient({ setUpdateTrigger, dateOfEvent }) {
     useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [timeBlock, setTimeBlock] = useState(null);
+  const [isTbSelected, setIsTbSelected] = useState(false);
 
   function handleAddTimeBlockModal() {
     setIsAddScheduleModalActive(true);
@@ -88,10 +89,12 @@ export function SeeTimeBlocksClient({ setUpdateTrigger, dateOfEvent }) {
                 new Date()
               );
               const startTime = format(startTimeParsed, "hh:mm a");
+
               const isSelected =
                 timeBlock &&
                 sched.startTime === timeBlock.startTime &&
                 sched.endTime === timeBlock.endTime;
+
               return (
                 <div
                   key={index}
