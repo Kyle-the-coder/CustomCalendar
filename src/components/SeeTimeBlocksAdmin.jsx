@@ -1,5 +1,5 @@
 import "../styles/seestimeblockadmin.css";
-import close from "../assets/close.png";
+import tbDelete from "../assets/close.png";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
 import { AddTimeBlockDisplay } from "./AddTimeBlockAdmin";
@@ -11,6 +11,7 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
   const [isAddScheduleModalActive, setIsAddScheduleModalActive] =
     useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [timeBlock, setTimeBlock] = useState(null);
 
   function handleAddTimeBlockModal() {
     setIsAddScheduleModalActive(true);
@@ -27,6 +28,10 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
     };
     searchLocalStorage();
   }, [isAddScheduleModalActive]);
+
+  function handleTimeBlockClick(sched) {
+    setTimeBlock(sched);
+  }
 
   useEffect(() => {
     const updateDayScheduleList = () => {
@@ -57,6 +62,8 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
     updateDayScheduleList();
   }, [fullScheduleList, dateOfEvent]);
 
+  function deleteTb() {}
+
   return (
     <div className="see-timeblock-main-container">
       <div className="timeblock-display-container">
@@ -80,20 +87,29 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
                 new Date()
               );
               const startTime = format(startTimeParsed, "hh:mm a");
+
+              const isSelected =
+                timeBlock &&
+                sched.startTime === timeBlock.startTime &&
+                sched.endTime === timeBlock.endTime;
               return (
                 <div
                   key={index}
                   style={{
-                    backgroundColor:
-                      hoveredIndex === index
-                        ? sched.isAvailableAppt
-                          ? "rgb(78, 203, 78)"
-                          : "rgb(200, 62, 62)"
-                        : sched.isAvailableAppt
-                        ? "lightGreen"
-                        : "lightCoral",
+                    backgroundColor: isSelected
+                      ? sched.isAvailableAppt
+                        ? "darkGreen"
+                        : "darkRed"
+                      : hoveredIndex === index
+                      ? sched.isAvailableAppt
+                        ? "rgb(78, 203, 78)"
+                        : "rgb(200, 62, 62)"
+                      : sched.isAvailableAppt
+                      ? "lightGreen"
+                      : "lightCoral",
                   }}
                   className="tb-container"
+                  onClick={() => handleTimeBlockClick(sched)}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -106,7 +122,7 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
                     ) : (
                       <h4 className="tb-end">Booked</h4>
                     )}
-                    <img src={close} className="tb-delete" />
+                    <img src={tbDelete} className="tb-delete" />
                   </div>
                 </div>
               );

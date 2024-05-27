@@ -84,6 +84,7 @@ export function AddTimeBlockDisplay({
     const createEventBlock = (start, end, date) => ({
       endTime: end,
       startTime: start,
+      id: crypto.randomUUID(),
       dateOfEvent: date,
       isAvailableAppt: isAvailableAppt,
     });

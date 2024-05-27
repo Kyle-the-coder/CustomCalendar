@@ -68,8 +68,6 @@ export function BookNowForm({
         return block;
       });
 
-      console.log(updatedArray);
-
       // Save the updated array back to localStorage
       localStorage.setItem(dateOfEvent, JSON.stringify(updatedArray));
       setUpdateTrigger((prev) => !prev);
