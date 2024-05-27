@@ -61,6 +61,7 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
 
     updateDayScheduleList();
   }, [fullScheduleList, dateOfEvent]);
+
   function deleteTb(sched) {
     // Retrieve the item from local storage
     const findSched = localStorage.getItem(sched.dateOfEvent);
@@ -92,6 +93,8 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
 
       // Update the dayScheduleList state
       setDayScheduleList(mapSched);
+
+      // Trigger the update effect in the parent component
       setUpdateTrigger((prev) => !prev);
     } else {
       console.error(`No schedule found for date: ${sched.dateOfEvent}`);
