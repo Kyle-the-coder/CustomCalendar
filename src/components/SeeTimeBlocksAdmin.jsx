@@ -61,8 +61,42 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
 
     updateDayScheduleList();
   }, [fullScheduleList, dateOfEvent]);
+  function deleteTb(sched) {
+    // Retrieve the item from local storage
+    const findSched = localStorage.getItem(sched.dateOfEvent);
 
-  function deleteTb() {}
+    if (findSched) {
+      // Parse the item as JSON
+      const findSchedArray = JSON.parse(findSched);
+
+      // Filter out the specific time block based on the id
+      const mapSched = findSchedArray.filter((tb) => tb.id !== sched.id);
+
+      if (mapSched.length > 0) {
+        // If the array is not empty, convert the updated array back to a JSON string
+        const updatedSchedJSON = JSON.stringify(mapSched);
+
+        // Store the updated JSON string back in local storage
+        localStorage.setItem(sched.dateOfEvent, updatedSchedJSON);
+      } else {
+        // If the array is empty, remove the local storage key
+        localStorage.removeItem(sched.dateOfEvent);
+      }
+
+      // Update the fullScheduleList state
+      setFullScheduleList((prevList) =>
+        mapSched.length > 0
+          ? prevList
+          : prevList.filter((date) => date !== sched.dateOfEvent)
+      );
+
+      // Update the dayScheduleList state
+      setDayScheduleList(mapSched);
+      setUpdateTrigger((prev) => !prev);
+    } else {
+      console.error(`No schedule found for date: ${sched.dateOfEvent}`);
+    }
+  }
 
   return (
     <div className="see-timeblock-main-container">
@@ -122,7 +156,11 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
                     ) : (
                       <h4 className="tb-end">Booked</h4>
                     )}
-                    <img src={tbDelete} className="tb-delete" />
+                    <img
+                      src={tbDelete}
+                      className="tb-delete"
+                      onClick={() => deleteTb(sched)}
+                    />
                   </div>
                 </div>
               );

@@ -67,13 +67,11 @@
 .tb {
   margin-left: 2%;
 }
-.tb-end {
-  margin-right: 2%;
-}
+
 .tb-delete-container {
-  width: 27%;
+  width: 36%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 .tb-delete {
