@@ -2,9 +2,9 @@ import "../styles/seeschedulemodal.css";
 import close from "../assets/close.png";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
-import { AddTimeBlockDisplay } from "./AddTimeBlockDisplay";
+import { AddTimeBlockDisplay } from "./AddTimeBlockAdmin";
 
-export function SeeTimeBlocksModal({ setUpdateTrigger, dateOfEvent }) {
+export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
   const [fullScheduleList, setFullScheduleList] = useState([]);
   const [dayScheduleList, setDayScheduleList] = useState([]);
   const [isSchedLoaded, setIsSchedLoaded] = useState(false);

@@ -13,7 +13,7 @@ import {
   endOfMonth,
 } from "date-fns";
 import "./styles/calendar.css";
-import { SeeTimeBlocksModal } from "./components/SeeTimeBlocksModal";
+import { SeeTimeBlocksAdmin } from "./components/SeeTimeBlocksAdmin";
 import { useExtendDate } from "./components/context/ExtendDateContext";
 
 const CalendarAdmin = () => {
@@ -123,7 +123,7 @@ const CalendarAdmin = () => {
         </div>
       </div>
       <div className="see-sched-main-container">
-        <SeeTimeBlocksModal
+        <SeeTimeBlocksAdmin
           dateOfEvent={dateOfEvent}
           updateTrigger={updateTrigger}
           setUpdateTrigger={setUpdateTrigger}
