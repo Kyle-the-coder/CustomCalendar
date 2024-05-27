@@ -70,6 +70,15 @@
 .tb-end {
   margin-right: 2%;
 }
+.tb-delete-container {
+  width: 27%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.tb-delete {
+  width: 20px;
+}
 
 .tb-submit-button {
   padding: 8px 20px 8px 20px;

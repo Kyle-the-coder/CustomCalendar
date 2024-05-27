@@ -1,4 +1,4 @@
-import "../styles/seeschedulemodal.css";
+import "../styles/seestimeblockadmin.css";
 import close from "../assets/close.png";
 import { useEffect, useState } from "react";
 import { parse, format } from "date-fns";
@@ -100,11 +100,14 @@ export function SeeTimeBlocksAdmin({ setUpdateTrigger, dateOfEvent }) {
                   <h4 className="tb">
                     {startTime} - {endTime}
                   </h4>
-                  {sched.isAvailableAppt ? (
-                    <h4 className="tb-end">Available</h4>
-                  ) : (
-                    <h4 className="tb-end">Booked</h4>
-                  )}
+                  <div className="tb-delete-container">
+                    {sched.isAvailableAppt ? (
+                      <h4 className="tb-end">Available</h4>
+                    ) : (
+                      <h4 className="tb-end">Booked</h4>
+                    )}
+                    <img src={close} className="tb-delete" />
+                  </div>
                 </div>
               );
             })

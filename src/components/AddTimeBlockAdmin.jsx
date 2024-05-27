@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import close from "../assets/close.png";
-import "../styles/schedulemodal.css";
+import "../styles/addtimeblockadmin.css";
 import gsap from "gsap";
 import { ExtendDateContext, useExtendDate } from "./context/ExtendDateContext";
 import { format } from "date-fns";
