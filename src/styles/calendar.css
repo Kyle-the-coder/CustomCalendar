@@ -117,3 +117,7 @@
 .highlighted {
   background-color: rgb(255, 255, 174);
 }
+
+.cc-selected-date {
+  border: 2px solid blue;
+}

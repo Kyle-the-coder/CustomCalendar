@@ -91,13 +91,16 @@ const CalendarClient = () => {
             const hasEvent =
               fullScheduleList &&
               fullScheduleList.some((schedule) => schedule === formattedDate);
+            const isSelectedDate = formattedDate === dateOfEvent;
 
             return (
               <div
                 key={index}
                 className={`calendar-client-day ${
                   !isSameMonth(day, startDateOfMonth) && "cc-other-month"
-                }  ${!hasEvent && "cc-no-event"}`}
+                }  ${!hasEvent && "cc-no-event"} ${
+                  isSelectedDate ? "cc-selected-date" : ""
+                }`}
                 onClick={() => handleSeeSchedClick(day)}
               >
                 <div className={`calendar-client-day-num `}>

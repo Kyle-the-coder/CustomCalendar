@@ -100,12 +100,15 @@ const CalendarAdmin = () => {
                 })
               : false;
 
+            const isSelectedDate = formattedDate === dateOfEvent;
             return (
               <div
                 key={index}
                 className={`calendar-day ${
                   !isSameMonth(day, currentMonth) ? "other-month" : ""
-                } ${isHighlighted ? "highlighted" : ""}`}
+                } ${isHighlighted ? "highlighted" : ""} ${
+                  isSelectedDate ? "cc-selected-date" : ""
+                }`}
                 onClick={() => handleSeeSchedClick(day)}
               >
                 <div className={`calendar-day-num `}>
